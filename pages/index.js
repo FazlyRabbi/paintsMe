@@ -218,7 +218,7 @@ export default function Home() {
             </div>
           </div>
           {/* top selling items */}
-          <div className="my-20 mx-4">
+          <div className="my-20">
             <div className="text-center my-10">
               <p className="text-[25px] md:text-[40px] font-semibold mb-4">
                 <span className="text-primary">Top selling</span> items
