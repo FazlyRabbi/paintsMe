@@ -26,11 +26,3 @@ export default function Shop() {
   );
 }
 
-// export async function getStaticProps() {
-//   const res = await fetch("https://demo-production-edcf.up.railway.app/api/products?populate=*");
-//   const products = await res.json();
-//   return {
-//     props: { products},
-//     revalidate: 1,
-//   };
-// }

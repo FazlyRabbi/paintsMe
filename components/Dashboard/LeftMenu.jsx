@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
-import { IoIosPeople } from "react-icons/io";
-import { GrUserWorker } from "react-icons/gr";
-import { CiMoneyBill } from "react-icons/ci";
-import { GiTakeMyMoney } from "react-icons/gi";
-import { SiOpenproject } from "react-icons/si";
-import { FiMessageSquare } from "react-icons/fi";
-import { AiOutlineContacts } from "react-icons/ai";
-import { BsMicrosoftTeams, BsMotherboard } from "react-icons/bs";
-import { MdOutlineStore, MdOutlineNoteAlt } from "react-icons/md";
+
+import { AiOutlineLayout } from "react-icons/ai";
+
+import {
+  MdOutlineStore,
+  MdOutlineNoteAlt,
+  MdProductionQuantityLimits,
+} from "react-icons/md";
+
 import { useRouter } from "next/router";
 // import logo from "../../img/logo.png";
 
@@ -81,6 +81,82 @@ function LeftMenu() {
               <MdOutlineStore className="  text-[1.3rem]  text-inherit" />
             </div>
             Orders
+          </Link>
+          <Link
+            href={`/dashboard/products`}
+            className={`
+          
+           ${
+             router.pathname === "/dashboard/products"
+               ? ` 
+           
+            rounded-lg
+
+            bg-white shadow-md`
+               : ""
+           }
+           
+           px-4 py-3
+          w-[90%] flex justify-left gap-3 items-center text-base  font-normal
+            
+            text-[#394B6B] capitalize `}
+          >
+            <div
+              className={`
+          
+            ${
+              router.pathname === "/dashboard/products"
+                ? `
+            
+                bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+            
+            `
+                : ``
+            }
+          
+          p-[5px] rounded-lg shadow-md`}
+            >
+              <MdProductionQuantityLimits className="  text-[1.3rem]  text-inherit" />
+            </div>
+            Products
+          </Link>
+          <Link
+            href={`/dashboard/sidebars`}
+            className={`
+          
+           ${
+             router.pathname === "/dashboard/sidebars"
+               ? ` 
+           
+            rounded-lg
+
+            bg-white shadow-md`
+               : ""
+           }
+           
+           px-4 py-3
+          w-[90%] flex justify-left gap-3 items-center text-base  font-normal
+            
+            text-[#394B6B] capitalize `}
+          >
+            <div
+              className={`
+          
+            ${
+              router.pathname === "/dashboard/sidebars"
+                ? `
+            
+                bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+            
+            `
+                : ``
+            }
+          
+          p-[5px] rounded-lg shadow-md`}
+            >
+              <AiOutlineLayout className="  text-[1.3rem]  text-inherit" />
+            </div>
+            Sidebars
           </Link>
         </div>
       </section>

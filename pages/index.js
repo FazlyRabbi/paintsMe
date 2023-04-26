@@ -637,6 +637,8 @@ export default function Home() {
             <NewsLetter />
           </>
         </div>
+
+
         <div className="hidden lg:block">
           <div className="grid grid-cols-5 bg-[#f5f7fa] px-7 gap-6 py-20">
             <div className="relative">
@@ -701,6 +703,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+
+
 
         <div className=" bg-[#f5f7fa] block lg:hidden py-16">
           <ProductSlider />

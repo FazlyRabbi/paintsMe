@@ -1,22 +1,24 @@
 import DHeader from "@/components/Dashboard/DHeader";
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import slugify from "slugify";
 // import leftmenu
 import LeftMenu from "@/components/Dashboard/LeftMenu";
 import useSweetAlert from "@/components/lib/sweetalert2";
 import { API_TOKEN, API_URL } from "@/config/index";
-import { CSVLink } from "react-csv";
 import DataTable from "react-data-table-component";
 import { TiDeleteOutline } from "react-icons/ti";
 
 // import tailwind modal
 import {
+  Button,
+  Card,
+  CardBody,
   Chip,
   Dialog,
   DialogBody,
   DialogHeader,
+  Input,
 } from "@material-tailwind/react";
 
 // imports react pdf
@@ -47,8 +49,33 @@ const styles = StyleSheet.create({
 });
 
 function index() {
+  const inital = {
+    Title: "",
+    Description: "",
+    Cetegory: "",
+    Slug: "",
+  };
+
+  const [product, setProduct] = useState(inital);
+  const [thubmnail, setThubmnail] = useState(null);
+
+  // generate slug
+  const genrerateSlug = (string) => {
+    const slug = slugify(string, {
+      lower: true, // Convert to lowercase
+      remove: /[*+~.()'"!:@]/g, // Remove special characters
+    });
+    setProduct({ ...product, Slug: slug });
+  };
+
+  useEffect(() => {
+    genrerateSlug(product.Title);
+  }, [product?.Title]);
+
   // showing alert
   const { showAlert } = useSweetAlert();
+
+  const [isFatching, setIsFatching] = useState(false);
 
   // loead init members
   const [orders, setOrders] = useState([]);
@@ -58,6 +85,8 @@ function index() {
   const [filteredOrder, setFilteredOrder] = useState([]);
   //  set single Data
   const [singleData, setSingleData] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   // membershiip pdf
   const MembersPdf = () => (
@@ -170,6 +199,10 @@ function index() {
     </Document>
   );
 
+  const handleOpen = () => {
+    console.log("hello");
+  };
+
   // csv headers
   const headers = [
     { label: "ID", key: "id" },
@@ -213,94 +246,6 @@ function index() {
     );
     setFilteredOrder(result);
   }, [search]);
-
-  // all functionalitys
-  const [downloadDialog, setDownloadDialog] = useState(false);
-  const [downloads, setDownload] = useState([]);
-
-  const dwonloadFile = (e) => {
-    setDownloadDialog(!downloadDialog);
-    setDownload(e);
-  };
-
-  const finalDownload = (data) => {
-    const downloadLink = document.createElement("a");
-    downloadLink.target = "_blank";
-    // Set the href and download attributes on the download link
-    downloadLink.href = data.url;
-    downloadLink.download = data.name;
-    downloadLink.click();
-  };
-
-  // handle status change
-
-  const handleStatus = async (action, data) => {
-    showAlert({
-      text: "Do you want to save the changes?",
-      showDenyButton: false,
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      // denyButtonText: `Don't save`,
-    }).then(async (result) => {
-      if (!result?.isConfirmed) return;
-
-      const newData = { ...data?.attributes?.orderInfo, status: action };
-
-      const res = await fetch(
-        `${API_URL}/api/orders/${data?.id}?populate[orderInfo][populate]=*`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: API_TOKEN,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            data: {
-              orderInfo: newData,
-            },
-          }),
-        }
-      );
-
-      if (!res.ok) return;
-
-      showAlert({
-        icon: "success",
-        text: "Status Successfully Changed!",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    });
-  };
-
-  const handleDelete = async (data) => {
-    showAlert({
-      text: "Do you want to Delete?",
-      showDenyButton: false,
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      // denyButtonText: `Don't save`,
-    }).then(async (result) => {
-      if (!result?.isConfirmed) return;
-
-      const res = await fetch(`${API_URL}/api/orders/${data?.id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: API_TOKEN,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!res.ok) return;
-
-      showAlert({
-        icon: "success",
-        title: "Status Successfully Deleted!",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    });
-  };
 
   // table columns
   const columns = [
@@ -411,25 +356,21 @@ function index() {
     },
   };
 
-  // add products related task
-
-  const genrerateSlug = (string) => {
-    const slug = slugify(string, {
-      lower: true, // Convert to lowercase
-      remove: /[*+~.()'"!:@]/g, // Remove special characters
-    });
-    setProjectForm({ ...projectForm, Slug: slug });
-  };
-
-  // useEffect(() => {
-  //   genrerateSlug(projectForm.Title);
-  // }, [projectForm?.Title]);
-
   const formData = typeof window !== "undefined" ? new FormData() : "";
 
-  // const { showAlert } = useSweetAlert();
+  useEffect(() => {
+    if (!thubmnail) return;
 
-  // const [isFatching, setIsFatching] = useState(false);
+    Object.keys(thubmnail).forEach((property) => {
+      formData.append(
+        `files.Thubmnails`,
+        thubmnail[property],
+        thubmnail[property].name
+      );
+    });
+  }, [thubmnail]);
+
+  // const { showAlert } = useSweetAlert();
 
   // const addProjects = async () => {
   //   try {
@@ -452,14 +393,22 @@ function index() {
   //   }
   // };
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    // genrerateSlug(projectForm.Title);
-    // formData.append(`files.Thubmnail`, thubmnail, thubmnail.name);
-    // formData.append("data", JSON.stringify(projectForm));
-    // addProjects();
-    // setThubmnail(null);
-    // setProjectForm(projectIninitalForm);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    formData.append("data", JSON.stringify(product));
+
+    const res = await fetch(`${API_URL}/api/products`, {
+      method: "POST",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    console.log(data);
   };
 
   // show products
@@ -476,12 +425,112 @@ function index() {
       <Head>
         <title>Project</title>
       </Head>
+
+      <Head>
+        <title>Project</title>
+      </Head>
       <div className="grid  px-10 grid-cols-1 lg:grid-cols-5 gap-6 justify-items-left p-[3rem] ">
         <LeftMenu />
         <DHeader />
 
         <div className=" grid grid-cols-1 mt-[6rem] 2xl:grid-cols-3 gap-y-2 gap-2 lg:col-span-4 gap-x-5">
-          <div className=" mr-10  2xl:col-span-3  2xl:order-2">
+          <div className="project__form mt-[2rem] 2xl:order-1  order-2">
+            <Card className="w-full 2xl:w-96">
+              <h4 className=" text-center font-bold  text-[1.5rem] uppercase">
+                Add Products
+              </h4>
+
+              <form onSubmit={handleSubmit}>
+                <CardBody className="text-center gap-6  grid grid-cols-1">
+                  <Input
+                    required
+                    label="Title"
+                    disabled={isFatching}
+                    value={product.Title}
+                    onChange={(e) =>
+                      setProduct({ ...product, Title: e.target.value })
+                    }
+                  />
+
+                  <div>
+                    <p className=" text-left font-bold mb-3">Thubmnail</p>
+                    <input
+                      required
+                      disabled={isFatching}
+                      name="files[]"
+                      multiple
+                      accept="image/*"
+                      type="file"
+                      placeholder="Image"
+                      className="flex justify-start"
+                      onChange={(e) => setThubmnail(e.target.files)}
+                    />
+                  </div>
+
+                  <div>
+                    <p
+                      htmlFor="my-textarea"
+                      className="text-left font-bold mb-3"
+                    >
+                      Description
+                    </p>
+                    <textarea
+                      required
+                      id="my-textarea"
+                      disabled={isFatching}
+                      name="message"
+                      rows="3"
+                      cols="20"
+                      className="w-full border p-2 border-softGray rounded-md"
+                      value={product.Description}
+                      onChange={(e) =>
+                        setProduct({
+                          ...product,
+                          Description: e.target.value,
+                        })
+                      }
+                    ></textarea>
+                  </div>
+
+                  <Input
+                    required
+                    disabled={isFatching}
+                    label="Categorie"
+                    value={product.Cetegory}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        Cetegory: e.target.value,
+                      })
+                    }
+                  />
+
+                  <Input
+                    required
+                    disabled={isFatching}
+                    label="Slug"
+                    value={product?.Slug}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        Slug: e.target.value,
+                      })
+                    }
+                  />
+
+                  <Button type="submit" size="md" disabled={isFatching}>
+                    {isFatching ? (
+                      <span className=" animate-ping">loading..</span>
+                    ) : (
+                      `   Add Product`
+                    )}
+                  </Button>
+                </CardBody>
+              </form>
+            </Card>
+          </div>
+
+          <div className=" mr-10  2xl:col-span-2  2xl:order-2">
             <DataTable
               columns={columns}
               data={filteredOrder}
@@ -489,7 +538,7 @@ function index() {
               // highlightOnHover
               // selectableRows
               fixedHeader
-              title="Orders Table"
+              title="Project Table"
               subHeader
               subHeaderComponent={
                 <div className="relative mb-6 mt-4  shadow-sm">
@@ -520,221 +569,56 @@ function index() {
               customStyles={customStyles}
               subHeaderAlign="center"
               pagination
-              actions={
-                <div className="flex justify-between mb-4 items-center space-x-2">
-                  <CSVLink
-                    data={orders}
-                    headers={headers}
-                    filename={"Invest-data.csv"}
-                  >
-                    <Chip
-                      value="Download"
-                      className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-                    />
-                  </CSVLink>
+              // actions={
+              //   // <div className="flex justify-between mb-4 items-center space-x-2">
+              //   //   <CSVLink
+              //   //     data={projects}
+              //   //     headers={headers}
+              //   //     filename={"Invest-data.csv"}
+              //   //   >
+              //   //     <Chip
+              //   //       value="Download"
+              //   //       className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
+              //   //     />
+              //   //   </CSVLink>
 
-                  <CSVLink
-                    data={orders}
-                    headers={headers}
-                    filename={"Volunteers-data.csv"}
-                  >
-                    <Chip
-                      color="amber"
-                      value=" Download CSV"
-                      className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-                    />
-                  </CSVLink>
+              //   //   <CSVLink
+              //   //     data={projects}
+              //   //     headers={headers}
+              //   //     filename={"Volunteers-data.csv"}
+              //   //   >
+              //   //     <Chip
+              //   //       color="amber"
+              //   //       value=" Download CSV"
+              //   //       className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
+              //   //     />
+              //   //   </CSVLink>
 
-                  <Chip
-                    color="indigo"
-                    value="Pdf"
-                    className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-                  />
+              //   //   <Chip
+              //   //     color="indigo"
+              //   //     value="Pdf"
+              //   //     className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
+              //   //   />
 
-                  <Chip
-                    color="purple"
-                    value="Share"
-                    className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-                  />
-                </div>
-              }
+              //   //   <Chip
+              //   //     color="purple"
+              //   //     value="Share"
+              //   //     className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
+              //   //   />
+              //   // </div>
+              // }
             />
           </div>
         </div>
 
         {/* // tailwind modal  */}
 
-        {/* Dialog for dowload files */}
-        <Dialog open={downloadDialog}>
-          <DialogHeader className="  flex justify-end">
-            <TiDeleteOutline
-              className=" text-[1.5rem]   cursor-pointer"
-              onClick={() => setDownloadDialog(false)}
-            />
-          </DialogHeader>
-
-          <DialogBody>
-            <div
-              className="grid grid-cols-1  max-h-[80vh]   
-            overflow-y-auto 
-           
-            
-            2xl:overflow-visible  gap-5 
-          "
-            >
-              {downloads?.attributes?.products.map((product, index) => (
-                <div
-                  key={index}
-                  className="mr-2 lg:mr-0   justify-items-center 
-               items-center
-             grid grid-cols-1 xl:grid-cols-2 gap-2 gap-y-5"
-                >
-                  <div>
-                    <p className="font-bold text-black">{product.title}</p>
-                    <Image
-                      src={product.imgUrl}
-                      width="200"
-                      height="200"
-                      alt="product_image"
-                      className=" max-w-[10rem] max-h-[10rem] rounded-md place-content-center"
-                    />
-                  </div>
-
-                  <Chip
-                    onClick={() => finalDownload(product.file?.data.attributes)}
-                    value="Dwonlod"
-                    className=" cursor-pointer  block  capitalize shadow-md active:shadow-sm  text-sm  max-w-[5rem] "
-                  />
-                </div>
-              ))}
-            </div>
-          </DialogBody>
-        </Dialog>
-
-        <Dialog open={showProduct}>
-          <DialogHeader className="  flex justify-end">
-            <TiDeleteOutline
-              className=" text-[1.5rem]   cursor-pointer"
-              onClick={() => setShowProduct(false)}
-            />
-          </DialogHeader>
-
-          <DialogBody>
-            <div
-              className="grid grid-cols-1 max-h-[80vh]   
-            overflow-y-auto 
-            justify-items-center
-            gap-8 
-          "
-            >
-              {singleData?.products?.map((product, index) => (
-                <div
-                  key={index}
-                  className="
-                  
-                  gap-2 
-                
-                   bg-blue-gray-50 shadow-md  p-3 py-4 rounded-sm
-                  justify-items-center
-                grid grid-cols-1"
-                >
-                  <Image
-                    src={product.imgUrl}
-                    alt="img"
-                    height={100}
-                    width={100}
-                  />
-
-                  <h1>
-                    Title:
-                    <span className="font-bold text-black">
-                      {" "}
-                      {product.title}
-                    </span>
-                  </h1>
-                  <h1>
-                    JobName:
-                    <span className="font-bold text-black">
-                      {" "}
-                      {product.jobName}
-                    </span>
-                  </h1>
-                  <h1>
-                    Width_Length:
-                    <span className="font-bold text-black">
-                      {product.width_length}
-                    </span>
-                  </h1>
-
-                  <h1>
-                    Color:
-                    <span className="font-bold text-black">
-                      {product.color}
-                    </span>
-                  </h1>
-
-                  <h1>
-                    Lamination:
-                    <span className="font-bold text-black">
-                      {" "}
-                      {product.lamination}
-                    </span>
-                  </h1>
-
-                  <h1>
-                    Material:
-                    <span className="font-bold text-black">
-                      {product.material}
-                    </span>
-                  </h1>
-
-                  <h1>
-                    Production Time:
-                    <span className="font-bold text-black">
-                      {product.production_time}
-                    </span>
-                  </h1>
-
-                  <h1>
-                    Quantity:
-                    <span className="font-bold text-black">
-                      {product.quantity}
-                    </span>
-                  </h1>
-                  <h1>
-                    Reinforce:
-                    <span className="font-bold text-black">
-                      {" "}
-                      {product.reinforce}
-                    </span>
-                  </h1>
-                </div>
-              ))}
-            </div>
-          </DialogBody>
-        </Dialog>
-        {/* Dialog for dowload files */}
-        {/* <Dialog open={open} handler={handleOpen}>
+        <Dialog open={open} handler={handleOpen}>
           <DialogHeader className="  flex justify-between">
             {" "}
             <p className="text-[1.3rem]">
               {singleData.FirstName && singleData.FirstName}
             </p>
-            <PDFDownloadLink
-              document={<MembersPdf />}
-              fileName={`${singleData.FirstName}`}
-            >
-              {({ loading }) =>
-                loading ? (
-                  "Loading document..."
-                ) : (
-                  <Chip
-                    value="Dwonlod Pdf "
-                    className=" cursor-pointer   capitalize shadow-md active:shadow-sm  text-sm  "
-                  />
-                )
-              }
-            </PDFDownloadLink>
             <TiDeleteOutline
               className=" text-[1.5rem] cursor-pointer"
               onClick={handleOpen}
@@ -828,7 +712,7 @@ function index() {
               </div>
             </div>
           </DialogBody>
-        </Dialog> */}
+        </Dialog>
       </div>
     </>
   );

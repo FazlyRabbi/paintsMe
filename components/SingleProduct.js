@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { API_URL } from "../config";
 import Link from "next/link";
 
 import {
@@ -51,6 +50,7 @@ export default function SingleProduct({ details }) {
               details?.attributes.Slug
             }`}
           >
+      
             <Button variant="gradient" size="sm">
               Details
             </Button>

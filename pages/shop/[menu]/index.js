@@ -65,7 +65,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`https://paintsmebackend-production.up.railway.app/api/sidebars?populate=*`, {
+  const res = await fetch(`http://localhost:1337/api/sidebars?populate=*`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: API_TOKEN,
