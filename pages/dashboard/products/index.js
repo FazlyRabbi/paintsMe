@@ -2,24 +2,17 @@ import DHeader from "@/components/Dashboard/DHeader";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import slugify from "slugify";
+import Image from "next/image";
 // import leftmenu
 import LeftMenu from "@/components/Dashboard/LeftMenu";
+import RichText from "@/components/RitchText/RichText";
 import useSweetAlert from "@/components/lib/sweetalert2";
 import { API_TOKEN, API_URL } from "@/config/index";
+import { useRef } from "react";
 import DataTable from "react-data-table-component";
-import { TiDeleteOutline } from "react-icons/ti";
 
 // import tailwind modal
-import {
-  Button,
-  Card,
-  CardBody,
-  Chip,
-  Dialog,
-  DialogBody,
-  DialogHeader,
-  Input,
-} from "@material-tailwind/react";
+import { Button, Card, CardBody, Chip, Input } from "@material-tailwind/react";
 
 // imports react pdf
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
@@ -57,7 +50,6 @@ function index() {
   };
 
   const [product, setProduct] = useState(inital);
-  const [thubmnail, setThubmnail] = useState(null);
 
   // generate slug
   const genrerateSlug = (string) => {
@@ -76,249 +68,65 @@ function index() {
   const { showAlert } = useSweetAlert();
 
   const [isFatching, setIsFatching] = useState(false);
-
-  // loead init members
-  const [orders, setOrders] = useState([]);
+  // loeadinit members
+  const [products, setProducts] = useState([]);
   // leoad search
   const [search, setSearch] = useState("");
   // set filtered members
-  const [filteredOrder, setFilteredOrder] = useState([]);
-  //  set single Data
-  const [singleData, setSingleData] = useState("");
-
-  const [open, setOpen] = useState(false);
-
-  // membershiip pdf
-  const MembersPdf = () => (
-    <Document>
-      <Page size={"A4"} style={styles.doc}>
-        <Text style={styles.header} fixed>
-          {singleData.FirstName && singleData.FirstName}
-        </Text>
-
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: 50,
-            flexWrap: "wrap",
-            paddingHorizontal: 20,
-            marginTop: "20px",
-          }}
-        >
-          <View>
-            <Text style={styles.label} fixed>
-              Title
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.Title && singleData.Title}
-            </Text>
-          </View>
-
-          <View>
-            <Text style={styles.label} fixed>
-              FirstName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FirstName && singleData.FirstName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              LastName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.LastName && singleData.LastName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              MiddleName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.MiddleName && singleData.MiddleName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              FamilyLastName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FamilyLastName && singleData.FamilyLastName}
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: 50,
-            flexWrap: "wrap",
-            paddingHorizontal: 20,
-            marginTop: "20px",
-          }}
-        >
-          <View>
-            <Text style={styles.label} fixed>
-              FirstName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FirstName && singleData.FirstName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              FirstName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FirstName && singleData.FirstName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              FirstName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FirstName && singleData.FirstName}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.label} fixed>
-              FirstName
-            </Text>
-            <Text style={styles.input} fixed>
-              {singleData.FirstName && singleData.FirstName}
-            </Text>
-          </View>
-        </View>
-      </Page>
-    </Document>
-  );
-
-  const handleOpen = () => {
-    console.log("hello");
-  };
-
-  // csv headers
-  const headers = [
-    { label: "ID", key: "id" },
-    { label: "Title", key: "attributes.Title" },
-    { label: "Country", key: "attributes.Country" },
-    { label: "Slug", key: "attributes.Slug" },
-    { label: "ProjectDescription", key: "attributes.ProjectDescription" },
-    { label: "KushInvolment", key: "attributes.KushInvolment" },
-    { label: "RegistrationId", key: "attributes.RegistrationId" },
-    { label: "ProjectCategorie", key: "attributes.ProjectCategorie" },
-    { label: "Bradcamp", key: "attributes.Bradcamp" },
-    { label: "Name", key: "attributes.Replay.Name" },
-    { label: "Email", key: "attributes.Replay.Email" },
-    { label: "Phone", key: "attributes.Replay.Phone" },
-  ];
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Fetch data from an external API or database
   useEffect(() => {
-    fetch(
-      `${API_URL}/api/orders?populate[products][populate]=*&populate[Shipping][populate]=*&populate[Billing][populate]=*&populate[orderInfo][populate]=*`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: API_TOKEN,
-        },
-      }
-    )
+    fetch(`${API_URL}/api/products?populate=*`, {
+      method: "GET",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setOrders(data?.data);
-        setFilteredOrder(data?.data);
+        setProducts(data?.data);
+        setFilteredProducts(data?.data);
       })
       .catch((err) => console.error(err));
+
+      
   }, []);
 
   useEffect(() => {
-    const result = orders?.filter((order) =>
-      order.attributes.Billing.firstName
-        .toLowerCase()
-        .match(search.toLowerCase())
+    const result = products?.filter((product) =>
+      product.attributes.Title.toLowerCase().match(search.toLowerCase())
     );
-    setFilteredOrder(result);
+    setFilteredProducts(result);
   }, [search]);
 
   // table columns
   const columns = [
     {
-      name: "Order Id",
-      selector: (row) => row.attributes.orderInfo.orderId,
-      sortable: true,
-    },
-    {
-      name: "Customer",
-      selector: (row) => row.attributes.Billing.firstName,
-      sortable: true,
-    },
-    {
-      name: "Product Details",
+      name: "Thumbnail",
       cell: (row) => (
         <div className=" grid my-2 justify-between items-center xl:grid-cols-3 grid-cols-1 gap-2">
-          <Chip
-            value="Show"
-            color="green"
-            className=" cursor-pointer  lowercase "
-            onClick={() => handleShowProduct(row.attributes)}
+          <Image
+            src={row?.attributes?.Thubmnails_1?.data?.attributes.url}
+            height={40}
+            width={40}
+            alt="img"
+            className=" rounded-md"
           />
         </div>
       ),
-    },
-    {
-      name: "Delevary Price",
-      selector: (row) => `${row.attributes.orderInfo.price}$`,
       sortable: true,
     },
     {
-      name: "Files",
-      cell: (row) => (
-        <Chip
-          className=" cursor-pointer"
-          value="Show"
-          onClick={() => {
-            dwonloadFile(row);
-          }}
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
-            </svg>
-          }
-        ></Chip>
-      ),
+      name: "Title",
+      selector: (row) => row.attributes.Title,
+      sortable: true,
     },
-    // {
-    //   name: "Client Secret",
-    //   selector: (row) => row.attributes.orderInfo.paymentInfo,
 
-    // },
     {
-      name: "Actions",
-      cell: (row) => (
-        <select
-          required
-          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id="grid-state"
-          onChange={(status) => handleStatus(status.target.value, row)}
-        >
-          <option defaultChecked>Meaking</option>
-          <option>On Way</option>
-          <option>Shipped</option>
-        </select>
-      ),
-      selector: "selected",
-      sortable: false,
+      name: "Cetegory",
+      selector: (row) => row.attributes.Cetegory,
+      sortable: true,
     },
 
     {
@@ -335,6 +143,8 @@ function index() {
       ),
     },
   ];
+
+
 
   const customStyles = {
     rows: {
@@ -358,46 +168,31 @@ function index() {
 
   const formData = typeof window !== "undefined" ? new FormData() : "";
 
-  useEffect(() => {
-    if (!thubmnail) return;
+  const [thubmnail1, setThubmnail1] = useState(null);
+  const [thubmnail2, setThubmnail2] = useState(null);
+  const [thubmnail3, setThubmnail3] = useState(null);
+  const [thubmnail4, setThubmnail4] = useState(null);
 
-    Object.keys(thubmnail).forEach((property) => {
-      formData.append(
-        `files.Thubmnails`,
-        thubmnail[property],
-        thubmnail[property].name
-      );
-    });
-  }, [thubmnail]);
-
-  // const { showAlert } = useSweetAlert();
-
-  // const addProjects = async () => {
-  //   try {
-  //     setIsFatching(true);
-  //     const res = await fetch(`${API_URL}/api/projects`, {
-  //       method: "POST",
-  //       headers: {
-  //         Authorization: API_TOKEN,
-  //       },
-
-  //       body: formData,
-  //     });
-
-  //     const data = await res.json();
-  //     if (!res.ok) return;
-  //     showAlerts();
-  //     setIsFatching(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const inputFileRef = useRef(null);
+  
+  const form =
+    typeof window !== "undefined" ? document.querySelector("form") : "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.append("data", JSON.stringify(product));
+    if (!thubmnail1) return;
+    formData.append(`files.Thubmnails_1`, thubmnail1, thubmnail1.name);
+    if (!thubmnail2) return;
+    formData.append(`files.Thubmnails_2`, thubmnail2, thubmnail2.name);
+    if (!thubmnail3) return;
+    formData.append(`files.Thubmnails_3`, thubmnail3, thubmnail3.name);
+    if (!thubmnail4) return;
+    formData.append(`files.Thubmnails_4`, thubmnail4, thubmnail4.name);
 
-    const res = await fetch(`${API_URL}/api/products`, {
+    setIsFatching(true);
+
+    const res = await fetch(`${API_URL}/api/products?populate=*`, {
       method: "POST",
       headers: {
         Authorization: API_TOKEN,
@@ -408,16 +203,20 @@ function index() {
 
     const data = await res.json();
 
-    console.log(data);
-  };
+    if (res.ok) {
+      setIsFatching(true);
+      showAlert({
+        icon: "success",
+        title: "Product Added Successfully!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
 
-  // show products
-
-  const [showProduct, setShowProduct] = useState(false);
-
-  const handleShowProduct = (data) => {
-    setSingleData(data);
-    setShowProduct(true);
+      setProduct(inital);
+      inputFileRef.current.value = null;
+      // reset the form element
+      form.reset();
+    }
   };
 
   return (
@@ -453,17 +252,60 @@ function index() {
                   />
 
                   <div>
-                    <p className=" text-left font-bold mb-3">Thubmnail</p>
+                    <p className=" text-left font-bold mb-3">Thubmnail 1</p>
                     <input
+                      ref={inputFileRef}
                       required
                       disabled={isFatching}
-                      name="files[]"
-                      multiple
-                      accept="image/*"
+                      name="files"
+                      accept="image/jpeg, image/png"
+                      type="file"
+                      placeholder="Image"
+                      className="flex justify-start "
+                      onChange={(e) => setThubmnail1(e.target.files[0])}
+                    />
+                  </div>
+
+                  <div>
+                    <p className=" text-left font-bold mb-3">Thubmnail 2</p>
+                    <input
+                      ref={inputFileRef}
+                      required
+                      disabled={isFatching}
+                      name="files"
+                      accept="image/jpeg, image/png"
+                      type="file"
+                      placeholder="Image"
+                      className="flex justify-start "
+                      onChange={(e) => setThubmnail2(e.target.files[0])}
+                    />
+                  </div>
+                  <div>
+                    <p className=" text-left font-bold mb-3">Thubmnail 3</p>
+                    <input
+                      ref={inputFileRef}
+                      required
+                      disabled={isFatching}
+                      name="files"
+                      accept="image/jpeg, image/png"
                       type="file"
                       placeholder="Image"
                       className="flex justify-start"
-                      onChange={(e) => setThubmnail(e.target.files)}
+                      onChange={(e) => setThubmnail3(e.target.files[0])}
+                    />
+                  </div>
+                  <div>
+                    <p className=" text-left font-bold mb-3">Thubmnail 4</p>
+                    <input
+                      ref={inputFileRef}
+                      required
+                      disabled={isFatching}
+                      name="files"
+                      accept="image/jpeg, image/png"
+                      type="file"
+                      placeholder="Image"
+                      className="flex justify-start"
+                      onChange={(e) => setThubmnail4(e.target.files[0])}
                     />
                   </div>
 
@@ -474,22 +316,8 @@ function index() {
                     >
                       Description
                     </p>
-                    <textarea
-                      required
-                      id="my-textarea"
-                      disabled={isFatching}
-                      name="message"
-                      rows="3"
-                      cols="20"
-                      className="w-full border p-2 border-softGray rounded-md"
-                      value={product.Description}
-                      onChange={(e) =>
-                        setProduct({
-                          ...product,
-                          Description: e.target.value,
-                        })
-                      }
-                    ></textarea>
+
+                    <RichText setProduct={setProduct} product={product} />
                   </div>
 
                   <Input
@@ -533,12 +361,12 @@ function index() {
           <div className=" mr-10  2xl:col-span-2  2xl:order-2">
             <DataTable
               columns={columns}
-              data={filteredOrder}
+              data={filteredProducts}
               // selectableRowsHighlight
               // highlightOnHover
               // selectableRows
               fixedHeader
-              title="Project Table"
+              title="Products Table"
               subHeader
               subHeaderComponent={
                 <div className="relative mb-6 mt-4  shadow-sm">
@@ -569,150 +397,10 @@ function index() {
               customStyles={customStyles}
               subHeaderAlign="center"
               pagination
-              // actions={
-              //   // <div className="flex justify-between mb-4 items-center space-x-2">
-              //   //   <CSVLink
-              //   //     data={projects}
-              //   //     headers={headers}
-              //   //     filename={"Invest-data.csv"}
-              //   //   >
-              //   //     <Chip
-              //   //       value="Download"
-              //   //       className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-              //   //     />
-              //   //   </CSVLink>
-
-              //   //   <CSVLink
-              //   //     data={projects}
-              //   //     headers={headers}
-              //   //     filename={"Volunteers-data.csv"}
-              //   //   >
-              //   //     <Chip
-              //   //       color="amber"
-              //   //       value=" Download CSV"
-              //   //       className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-              //   //     />
-              //   //   </CSVLink>
-
-              //   //   <Chip
-              //   //     color="indigo"
-              //   //     value="Pdf"
-              //   //     className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-              //   //   />
-
-              //   //   <Chip
-              //   //     color="purple"
-              //   //     value="Share"
-              //   //     className=" cursor-pointer   capitalize shadow-md active:shadow-sm text-base  "
-              //   //   />
-              //   // </div>
-              // }
             />
           </div>
         </div>
 
-        {/* // tailwind modal  */}
-
-        <Dialog open={open} handler={handleOpen}>
-          <DialogHeader className="  flex justify-between">
-            {" "}
-            <p className="text-[1.3rem]">
-              {singleData.FirstName && singleData.FirstName}
-            </p>
-            <TiDeleteOutline
-              className=" text-[1.5rem] cursor-pointer"
-              onClick={handleOpen}
-            />
-          </DialogHeader>
-
-          <DialogBody>
-            <div
-              className="grid grid-cols-1 max-h-[80vh]   
-            overflow-y-auto 
-            xl:grid-cols-2
-            
-            2xl:overflow-visible  gap-5 2xl:grid-cols-3
-          "
-            >
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  Title
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={singleData.Title && singleData.Title}
-                  disabled
-                />
-              </div>
-
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  Country
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={singleData.Country && singleData.Country}
-                  disabled
-                />
-              </div>
-
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  Country
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={singleData.KushInvolment && singleData.KushInvolment}
-                  disabled
-                />
-              </div>
-
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  KushInvolment
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={singleData.KushInvolment && singleData.KushInvolment}
-                  disabled
-                />
-              </div>
-
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  ProjectCategorie
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={
-                    singleData.ProjectCategorie && singleData.ProjectCategorie
-                  }
-                  disabled
-                />
-              </div>
-
-              <div className="mr-2 lg:mr-0">
-                <label htmlFor="FirstName" className="text-black">
-                  ProjectDescription
-                </label>
-                <Input
-                  name="FirstName"
-                  className="pt-1"
-                  label={
-                    singleData.ProjectDescription &&
-                    singleData.ProjectDescription
-                  }
-                  disabled
-                />
-              </div>
-            </div>
-          </DialogBody>
-        </Dialog>
       </div>
     </>
   );

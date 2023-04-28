@@ -13,9 +13,8 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 export default function ThumbGellery({ url }) {
+  
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-
 
   return (
     <div>

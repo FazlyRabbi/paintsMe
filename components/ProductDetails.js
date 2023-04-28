@@ -1,37 +1,26 @@
-import RichText from "./RitchText/RichText";
 // import image
 import ThumbsGallery from "./Slider/ThumbGellery";
 
 // import required modules
 function ProductDetails({ details }) {
-  
-  const imgUrl = {};
-
   return (
     <section className=" overflow-hidden w-full">
-      <div className=" hidden">
-        {details &&
-          details.attributes.Thubmnails.data.map(
-            (data, index) => (imgUrl[`m${index}`] = data.attributes.url)
-          )}
-      </div>
+      <div className=" hidden"></div>
 
       <div className="product-slider">
-        {imgUrl !== {} ? (
-          <ThumbsGallery
-            url={{
-              url_1: imgUrl?.m0,
-              url_2: imgUrl?.m1,
-              url_3: imgUrl?.m2,
-              url_4: imgUrl?.m3,
-            }}
-          />
-        ) : (
-          ""
-        )}
+        <ThumbsGallery
+          url={{
+            url_1: details?.attributes?.Thubmnails_1?.data?.attributes?.url,
+            url_2: details?.attributes?.Thubmnails_2?.data?.attributes?.url,
+            url_3: details?.attributes?.Thubmnails_3?.data?.attributes?.url,
+            url_4: details?.attributes?.Thubmnails_4?.data?.attributes?.url,
+          }}
+        />
       </div>
-      <div className="product-content mt-4">
-        <RichText />
+      <div className="product-content mt-8 mb-4">
+        <div
+          dangerouslySetInnerHTML={{ __html: details?.attributes?.Description }}
+        />
       </div>
     </section>
   );

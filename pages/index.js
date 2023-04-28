@@ -355,7 +355,7 @@ export default function Home() {
             </div>
           </div>
           {/* new product */}
-          <div>
+          {/* <div>
             <div className="text-center my-10">
               <p className="text-[25px] md:text-[40px] font-semibold mb-4">
                 New Products
@@ -463,7 +463,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* testimonial */}

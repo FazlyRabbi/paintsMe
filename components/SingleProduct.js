@@ -11,6 +11,11 @@ import {
 } from "@material-tailwind/react";
 
 export default function SingleProduct({ details }) {
+  const removeHtml = () => {
+    const str = details?.attributes.Description.toString();
+    return str.replace(/<[^>]*>/g, "");
+  };
+
   return (
     <section className="product  cursor-pointer  ">
       <Card className="max-w-[25rem] overflow-hidden rounded-md">
@@ -23,8 +28,8 @@ export default function SingleProduct({ details }) {
           {details && (
             <Image
               src={`${
-                details.attributes.Thubmnails.data[0].attributes.url &&
-                `${details.attributes.Thubmnails.data[0].attributes.url}`
+                details.attributes.Thubmnails_1.data.attributes.url &&
+                `${details.attributes.Thubmnails_1.data.attributes.url}`
               }`}
               width={400}
               height={400}
@@ -41,7 +46,7 @@ export default function SingleProduct({ details }) {
             color="gray"
             className="mt-3 font-normal"
           >
-            {`${details?.attributes.Description.slice(0, 30)}.....`}
+            {`${removeHtml().slice(0, 30)}.....`}
           </Typography>
         </CardBody>
         <CardFooter className="flex items-center !py-0 mb-4  justify-between">
@@ -50,7 +55,6 @@ export default function SingleProduct({ details }) {
               details?.attributes.Slug
             }`}
           >
-      
             <Button variant="gradient" size="sm">
               Details
             </Button>

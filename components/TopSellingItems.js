@@ -49,7 +49,7 @@ function TopSellingItems() {
           <SwiperSlide key={index} className="rounded-3xl">
             <div className="p-4">
               <Image
-                src={product?.attributes?.Thubmnails.data[0].attributes.url}
+                src={product?.attributes?.Thubmnails_1?.data?.attributes?.url}
                 height={300}
                 width={300}
                 alt="product banner"

@@ -5,7 +5,9 @@ import { SidebarContext } from "@/context/SidebarContext";
 import { useContext } from "react";
 
 export default function Shop() {
+
   const { products } = useContext(SidebarContext);
+
 
   return (
     <Layout title={"shop"}>

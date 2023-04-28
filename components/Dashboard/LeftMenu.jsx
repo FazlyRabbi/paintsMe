@@ -4,12 +4,14 @@ import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
 
 import { AiOutlineLayout } from "react-icons/ai";
+import { TfiLayoutSlider } from "react-icons/tfi";
 
 import {
   MdOutlineStore,
   MdOutlineNoteAlt,
   MdProductionQuantityLimits,
 } from "react-icons/md";
+
 
 import { useRouter } from "next/router";
 // import logo from "../../img/logo.png";
@@ -120,6 +122,7 @@ function LeftMenu() {
             </div>
             Products
           </Link>
+
           <Link
             href={`/dashboard/sidebars`}
             className={`
@@ -156,7 +159,48 @@ function LeftMenu() {
             >
               <AiOutlineLayout className="  text-[1.3rem]  text-inherit" />
             </div>
-            Sidebars
+            Sidebar
+          </Link>
+
+          {/* home page dashboard */}
+
+          <Link
+            href={`/dashboard/home_slider`}
+            className={`
+          
+           ${
+             router.pathname === "/dashboard/home_slider"
+               ? ` 
+           
+            rounded-lg
+
+            bg-white shadow-md`
+               : ""
+           }
+           
+           px-4 py-3
+          w-[90%] flex justify-left gap-3 items-center text-base  font-normal
+            
+            text-[#394B6B] capitalize `}
+          >
+            <div
+              className={`
+          
+            ${
+              router.pathname === "/dashboard/home_slider"
+                ? `
+            
+                bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+            
+            `
+                : ``
+            }
+          
+          p-[5px] rounded-lg shadow-md`}
+            >
+              <TfiLayoutSlider className="  text-[1.3rem]  text-inherit" />
+            </div>
+            Home Slider
           </Link>
         </div>
       </section>
