@@ -9,7 +9,7 @@ export default function FooterNew() {
     return (
         <footer className="  shadow-md   py-[2.5rem] text-gray-700 bg-[#f5f7fa]">
             <div className="container mx-auto   ">
-                <div className="px-6 grid  justify-items-center md:justify-items-start text-center md:text-left  gap-y-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
+                <div className="px-6 grid  justify-items-center md:justify-items-start text-center md:text-left  gap-y-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                     <div className="info">
                         <h3 className="info-title text-[25px] font-bold capitalize">
                             information
@@ -50,18 +50,7 @@ export default function FooterNew() {
                             <li className="mb-2">+ (406) 555-0120</li>
                         </ul>
                     </div>
-                    <div className="info">
-                        <h3 className="info-title text-[25px] font-bold  capitalize">
-                        Information
-                        </h3>
-                        <ul className=" capitalize mt-2">
-                            <li className="mb-2">Help center</li>
-                            <li className="mb-2">Shiping</li>
-                            <li className="mb-2">Return</li>
-                            <li className="mb-2">Polcies</li>
-                            <li className="mb-2">Gift card</li>
-                        </ul>
-                    </div>
+                
                     <div className="info">
                         <h3 className="info-title text-[25px] font-bold  capitalize">
                             Useful Links

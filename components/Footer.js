@@ -12,46 +12,8 @@ export default function FooterNew() {
         
         gap-y-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4"
         >
-          <div className="info">
-            <h3 className="info-title text-[25px] font-bold capitalize">
-              information
-            </h3>
-            <ul className=" capitalize mt-2">
-              <li className="mb-2">2972 Westheimer Rd. Santa Ana,</li>
-              <li className="mb-2">Illinois 85486</li>
-              <li className="mb-2">support@example.com</li>
-              <li className="mb-2">+ (406) 555-0120</li>
-            </ul>
+      
 
-            <div className="mt-5 md:mt-8 ">
-              <ul className=" text-capilalize flex space-x-4">
-                <li className="p-3 rounded-full border cursor-pointer">
-                  <AiOutlineTwitter className="text-[1.2rem] cursor-pointer" />
-                </li>
-                <li className="p-3 rounded-full border cursor-pointer">
-                  <BsFacebook className="text-[1.2rem]" />
-                </li>
-                <li className="p-3 rounded-full border">
-                  <AiFillInstagram className="text-[1.2rem] cursor-pointer" />
-                </li>
-
-                <li className="p-3 rounded-full border cursor-pointer">
-                  <FaLinkedin className="text-[1.2rem]" />
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="info">
-            <h3 className="info-title text-[25px] font-bold capitalize">
-              Get In Touch
-            </h3>
-            <ul className=" capitalize mt-2">
-              <li className="mb-2">2972 Westheimer Rd. Santa Ana,</li>
-              <li className="mb-2">Illinois 85486</li>
-              <li className="mb-2">support@example.com</li>
-              <li className="mb-2">+ (406) 555-0120</li>
-            </ul>
-          </div>
           <div className="info">
             <h3 className="info-title text-[25px] font-bold  capitalize">
               Information

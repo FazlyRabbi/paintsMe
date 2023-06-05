@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Footer from "./Footer";
+import FooterNew from "@/components/FooterNew";
 import Main from "./Main";
 import Header from "./Header";
 
@@ -11,10 +11,10 @@ export default function layout({ title, des, content, children, mainContent }) {
         <meta name={content} content={des}></meta>
       </Head>
       <Header />
-      <Main> {children} </Main>
-      {/* <div className="mt-[4rem]">
-        <Footer></Footer>
-      </div> */}
+      <Main  > {children} </Main>
+      <div className="mt-[4rem]">
+        <FooterNew></FooterNew>
+      </div>
     </>
   );
 }

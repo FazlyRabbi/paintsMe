@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+
 const data = [
   {
     name: "Page A",
@@ -86,3 +87,5 @@ function AreaCharts() {
 }
 
 export default AreaCharts;
+
+

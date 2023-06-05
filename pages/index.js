@@ -33,15 +33,10 @@ export default function Home() {
       </Head>
 
       <header id="head" className="  sticky top-0  z-[9999]">
-
         <div className="header-top bg-[#1E1E1E] py-3">
-
           <div className="container mx-auto lg:px-10">
-
             <div className="header-top-content flex justify-between">
-
               <ul className="flex flex-wrap   items-center  text-white">
-                
                 <Link href={`tel:929 217-6589`}>
                   <li className="  border-r px-3 flex   items-center">
                     <MdPhoneCallback className="text-[1.2rem] text-second" />
@@ -117,9 +112,6 @@ export default function Home() {
 
                   <Link href={"/contacts"} className="font-bold text-[14px]">
                     Contact
-                  </Link>
-                  <Link href={"/contacts"} className="font-bold text-[14px]">
-                    Request A Quote
                   </Link>
                   <Link href={"/contacts"} className="font-bold text-[14px]">
                     Our Catalog
@@ -526,7 +518,7 @@ export default function Home() {
           </div>
         </div>
         {/* service accordion */}
-        <div className="bg-[#f5f7fa] px-7 py-20">
+        {/* <div className="bg-[#f5f7fa] px-7 py-20">
           <div className="text-center mb-10">
             <p className="text-[25px] md:text-[40px] font-semibold mb-4">
               {" "}
@@ -554,7 +546,8 @@ export default function Home() {
               <ServiceAccordion />
             </div>
           </div>
-        </div>
+        </div> */}
+
         {/* blog posts */}
         <div className="bg-[#f5f7fa] px-7 gap-6 py-20 grid grid-cols-1 md:grid-cols-3">
           <div className="pt-10 pr-8">
@@ -623,7 +616,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-[#f5f7fa] px-7 py-1">
+        {/* <div className="bg-[#f5f7fa] px-7 py-1">
           <div className="text-center">
             <p className="text-[25px] md:text-[40px] font-semibold mb-4">
               Sign up for{" "}
@@ -636,8 +629,7 @@ export default function Home() {
           <>
             <NewsLetter />
           </>
-        </div>
-
+        </div> */}
 
         <div className="hidden lg:block">
           <div className="grid grid-cols-5 bg-[#f5f7fa] px-7 gap-6 py-20">
@@ -703,9 +695,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-
-
 
         <div className=" bg-[#f5f7fa] block lg:hidden py-16">
           <ProductSlider />
