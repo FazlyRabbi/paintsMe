@@ -144,7 +144,7 @@ export default function Calculator({ product }) {
       material: product?.attributes?.Title,
       jobName: jobName,
       file: null,
-      imgUrl: product?.attributes?.Thubmnails.data[0].attributes.url,
+      imgUrl: product?.attributes.Thubmnails_1.data.attributes.url,
       title: product?.attributes?.Title,
     });
 

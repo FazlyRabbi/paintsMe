@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signup = async (userData) => {
-    console.log(userData);
+
     const res = await fetch(`${API_URL}/api/auth/local/register`, {
       method: "POST",
       headers: {
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
     if (data.user) {
       setUser(data);
-      console.log(data);
+  
       return;
     } else {
       setError(data);

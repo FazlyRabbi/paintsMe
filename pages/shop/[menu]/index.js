@@ -6,9 +6,7 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
-
 export default function productDetails() {
-
   const route = useRouter();
 
   const { products } = useContext(SidebarContext);
@@ -65,12 +63,15 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`https://printandgraph.onrender.com/api/sidebars?populate=*`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: API_TOKEN,
-    },
-  });
+  const res = await fetch(
+    `https://printandgraph-backend.onrender.com/api/sidebars?populate=*`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: API_TOKEN,
+      },
+    }
+  );
 
   const path = await res.json();
 
