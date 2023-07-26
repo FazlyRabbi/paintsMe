@@ -175,33 +175,57 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-16 gap-7 mx-2">
             <div className="col-span-1 xl:col-span-2 row-span-1 xl:row-span-2 relative flex">
               <button className="bg-white text-gray-800 px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
-                Packaging
+                Brochure
               </button>
-              <Image src={image1} className="rounded-3xl shadow-md border" alt="img" height={400} width={800} />
+              <Image
+                src={image5}
+                className="rounded-3xl shadow-md border"
+                alt="img"
+                height={400}
+                width={800}
+              />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Business Cards
               </button>
-              <Image src={image2} className="rounded-3xl  shadow-md border w-full" alt="img" height={400} width={800}  />
+              <Image
+                src={image4}
+                className="rounded-3xl  shadow-md border w-full"
+                alt="img"
+                height={400}
+                width={800}
+              />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
-                t-shirt
+                Door Hangers
               </button>
-              <Image src={image3} className="rounded-3xl   shadow-md border w-full" alt="img" />
+              <Image
+                src={image3}
+                className="rounded-3xl   shadow-md border w-full"
+                alt="img"
+              />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
-                Brochures
+                FLyers
               </button>
-              <Image src={image4} className="rounded-3xl w-full shadow-md border " alt="img" />
+              <Image
+                src={image2}
+                className="rounded-3xl w-full shadow-md border "
+                alt="img"
+              />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Booklets
               </button>
-              <Image src={image5} className="rounded-3xl w-full shadow-md border " alt="img" />
+              <Image
+                src={image5}
+                className="rounded-3xl w-full shadow-md border "
+                alt="img"
+              />
             </div>
           </div>
           {/* top selling items */}
@@ -618,7 +642,7 @@ export default function Home() {
           </>
         </div> */}
 
-        <div className="hidden lg:block">
+        {/* <div className="hidden lg:block">
           <div className="grid grid-cols-5 bg-[#f5f7fa] px-7 gap-6 py-20">
             <div className="relative">
               <img
@@ -685,7 +709,7 @@ export default function Home() {
 
         <div className=" bg-[#f5f7fa] block lg:hidden py-16">
           <ProductSlider />
-        </div>
+        </div> */}
         <FooterNew />
       </section>
     </section>

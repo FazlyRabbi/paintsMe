@@ -33,7 +33,7 @@ export default function Calculator({ product }) {
   const [calData, setCalData] = useState(inital);
 
   // make the main calculations
-  const price = 10; //10 doller
+  const price = 125; //10 doller
 
   const calculation = () => {
     // convert string to number
@@ -198,7 +198,7 @@ export default function Calculator({ product }) {
                 className="block tracking-wide text-gray-700  mb-1"
                 htmlFor="grid-first-name"
               >
-                Width <span className="text-red-600 font-bold">(Fet)</span>
+                Width <span className="text-red-600 font-bold">(Inch)</span>
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-2 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
@@ -216,7 +216,7 @@ export default function Calculator({ product }) {
                 className="block tracking-wide text-gray-700  mb-1"
                 htmlFor="grid-first-name"
               >
-                Height <span className="text-red-600 font-bold">(Fet)</span>
+                Height <span className="text-red-600 font-bold">(Inch)</span>
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-2 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
