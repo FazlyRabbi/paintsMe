@@ -25,6 +25,13 @@ import FooterNew from "@/components/FooterNew";
 import BannerSlider from "@/components/BannerSlider";
 import BannerSlideMobile from "@/components/BannerSlideMobile";
 
+// import images
+import image1 from "../img/banner/unnamed1.png";
+import image2 from "../img/banner/unnamed2.png";
+import image3 from "../img/banner/unnamed3.png";
+import image4 from "../img/banner/unnamed4.png";
+import image5 from "../img/banner/unnamed5.png";
+
 export default function Home() {
   return (
     <section>
@@ -170,51 +177,31 @@ export default function Home() {
               <button className="bg-white text-gray-800 px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Packaging
               </button>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_cat5.jpg"
-                className="rounded-3xl"
-                alt="img"
-              />
+              <Image src={image1} className="rounded-3xl shadow-md border" alt="img" height={400} width={800} />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Business Cards
               </button>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_cat4.jpg"
-                className="rounded-3xl w-full"
-                alt="img"
-              />
+              <Image src={image2} className="rounded-3xl  shadow-md border w-full" alt="img" height={400} width={800}  />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 t-shirt
               </button>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_cat2.jpg"
-                className="rounded-3xl w-full"
-                alt="img"
-              />
+              <Image src={image3} className="rounded-3xl   shadow-md border w-full" alt="img" />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Brochures
               </button>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_cat3.jpg"
-                className="rounded-3xl w-full"
-                alt="img"
-              />
+              <Image src={image4} className="rounded-3xl w-full shadow-md border " alt="img" />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
               <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
                 Booklets
               </button>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_cat1.jpg"
-                className="rounded-3xl w-full"
-                alt="img"
-              />
+              <Image src={image5} className="rounded-3xl w-full shadow-md border " alt="img" />
             </div>
           </div>
           {/* top selling items */}

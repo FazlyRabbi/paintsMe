@@ -15,10 +15,11 @@ export default function FooterNew() {
                             information
                         </h3>
                         <ul className=" capitalize mt-2">
-                            <li className="mb-2">2972 Westheimer Rd. Santa Ana,</li>
-                            <li className="mb-2">Illinois 85486</li>
-                            <li className="mb-2">support@example.com</li>
-                            <li className="mb-2">+ (406) 555-0120</li>
+                            <li className="mb-2">13220 Jamaica Ave, Queens, NY 11418`
+</li>
+                          
+                            <li className="mb-2">nprintandgraph@gmail.com</li>
+                            <li className="mb-2">929 217-6589</li>
                         </ul>
 
                         <div className="mt-5 md:mt-8 ">
@@ -44,10 +45,11 @@ export default function FooterNew() {
                             Get In Touch
                         </h3>
                         <ul className=" capitalize mt-2">
-                            <li className="mb-2">2972 Westheimer Rd. Santa Ana,</li>
-                            <li className="mb-2">Illinois 85486</li>
-                            <li className="mb-2">support@example.com</li>
-                            <li className="mb-2">+ (406) 555-0120</li>
+                            <li className="mb-2">13220 Jamaica Ave, Queens, NY 11418`
+</li>
+                            
+                            <li className="mb-2">nprintandgraph@gmail.com</li>
+                            <li className="mb-2">929 217-6589</li>
                         </ul>
                     </div>
                 
