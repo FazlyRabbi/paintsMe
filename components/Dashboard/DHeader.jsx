@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { CgMenuRightAlt, CgProfile } from "react-icons/cg";
 import { AuthContext } from "@/context/AuthContext";
+import { signOut } from "next-auth/react";
 
 function DHeader() {
-  const { signOut, setOpen, open } = useContext(AuthContext);
+  const { setOpen, open } = useContext(AuthContext);
 
   return (
     <div

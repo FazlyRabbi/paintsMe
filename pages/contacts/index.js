@@ -25,8 +25,6 @@ function contacts() {
                 className="appearance-none block w-full  bg-[#F4F6FA]
                  text-gray-700 border-gray-100 py-6  rounded-full px-6 mb-1 leading-tight   capitalize  focus:bg-white
                  focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-                 
-                 
                  "
                 id="grid-first-name"
                 type="text"
