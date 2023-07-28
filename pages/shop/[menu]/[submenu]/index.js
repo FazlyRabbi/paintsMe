@@ -8,7 +8,6 @@ import { SidebarContext } from "../../../../context/SidebarContext";
 import slugify from "slugify";
 
 function index() {
-
   const [singleProduct, setSingleProduct] = useState(null);
   const router = useRouter();
   const { products } = useContext(SidebarContext);
@@ -21,7 +20,6 @@ function index() {
     setSingleProduct(singleProduct);
   }, [router.query.submenu]);
 
-  
   return (
     <Layout title={router.query.submenu}>
       <div className="product heading ml-4 ">
@@ -52,4 +50,3 @@ function index() {
 }
 
 export default index;
-

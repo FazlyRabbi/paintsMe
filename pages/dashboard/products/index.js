@@ -89,8 +89,6 @@ function index() {
         setFilteredProducts(data?.data);
       })
       .catch((err) => console.error(err));
-
-      
   }, []);
 
   useEffect(() => {
@@ -144,8 +142,6 @@ function index() {
     },
   ];
 
-
-
   const customStyles = {
     rows: {
       style: {
@@ -174,7 +170,7 @@ function index() {
   const [thubmnail4, setThubmnail4] = useState(null);
 
   const inputFileRef = useRef(null);
-  
+
   const form =
     typeof window !== "undefined" ? document.querySelector("form") : "";
 
@@ -400,7 +396,6 @@ function index() {
             />
           </div>
         </div>
-
       </div>
     </>
   );

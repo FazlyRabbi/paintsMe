@@ -6,16 +6,36 @@ import { useContext, useEffect, useState } from "react";
 function generateProductName() {
   const randomNumber = Math.floor(Math.random() * 100000000);
   const paddedNumber = randomNumber.toString().padStart(8, "0");
+
   return paddedNumber;
 }
 
 export default function Calculator({ product }) {
   const { setCurrentProduct } = useContext(CardContext);
-
   // geting all input required data
   const [error, setError] = useState(null);
   const [widthError, setWidthError] = useState(null);
   const [heightError, setHeightError] = useState(null);
+
+  // Ensure that the price is a valid number before setting it to the state
+  // const initialPrice =
+  //   typeof product?.attributes?.basePrice === "number"
+  //     ? product.attributes.basePrice
+  //     : 0;
+  // const [price, setPrice] = useState(initialPrice);
+  let price = 0;
+
+  useEffect(() => {
+    // Update the price state when the product attributes change
+    if (typeof product?.attributes?.basePrice === "number") {
+      price = product?.attributes?.basePrice;
+    }
+  }, [product?.attributes?.basePrice]);
+  // input dynamic price form server
+  // useEffect(() => {
+  //   const price = product?.attributes?.basePrice;
+  //   setPrice(price);
+  // }, [product?.attributes?.basePrice]);
 
   const inital = {
     width_length: "1' x 1'",
@@ -33,7 +53,7 @@ export default function Calculator({ product }) {
   const [calData, setCalData] = useState(inital);
 
   // make the main calculations
-  const price = 125; //10 doller
+  // const price = 125; //10 doller
 
   const calculation = () => {
     // convert string to number
@@ -81,8 +101,10 @@ export default function Calculator({ product }) {
   };
 
   useEffect(() => {
-    const totalPrice = calculation();
-    setCalData({ ...calData, total: totalPrice.toString() });
+    if (typeof product?.attributes?.basePrice === "number") {
+      const totalPrice = calculation();
+      setCalData({ ...calData, total: totalPrice.toString() });
+    }
   }, [
     calData.width_length,
     calData.quantity,
@@ -93,6 +115,7 @@ export default function Calculator({ product }) {
     calData.production_time,
     calData.customWidth,
     calData.customHeight,
+    product?.attributes?.basePrice,
   ]);
 
   // set quantity

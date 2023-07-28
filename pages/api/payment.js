@@ -9,7 +9,6 @@ export default async function chargepayment(req, res) {
     const { amount } = req.body;
     // crate a customer
 
-      console.log(amount);
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "USD",
       amount: amount * 100,
