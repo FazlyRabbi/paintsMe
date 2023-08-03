@@ -1,0 +1,117 @@
+.icon {
+  font-size: 2.5rem !important;
+}
+.cart {
+  font-size: 2rem !important;
+}
+
+.hero {
+  background-image: url("../img/bg//bg1.webp");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+.hero2 {
+  background-image: url("../img/hero_2.webp");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.hero3 {
+  background-image: url("../img/hero_3.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.hero4 {
+  background-image: url("../img/hero4.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hero5 {
+  background-image: url("../img/hero5.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hero6 {
+  background-image: url("../img/hero6.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.borderGradient {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(
+      to right,
+      #0997ff 20% 70%,
+      #ffc907 40% 80%,
+      #94c840 60% 90%,
+      #ea0000 88%
+    )
+    1;
+}
+.borderGradientLeft {
+  border-left: 8px solid;
+  border-image: linear-gradient(
+      to top,
+      #0997ff 20% 70%,
+      #ffc907 40% 80%,
+      #94c840 60% 90%,
+      #ea0000 88%
+    )
+    1;
+}
+
+.formControl::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.formControl:hover::before {
+  border-color: black;
+}
+
+.formControl::before {
+  content: "select file";
+
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 10px 100px;
+  text-transform: capitalize;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.input {
+  box-shadow: none !important;
+}
+
+.catagoryCard {
+  padding: 1rem 1rem 0.2rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+}
+
+.catagoryCard:hover {
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 30%);
+}
