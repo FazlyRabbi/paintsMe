@@ -37,7 +37,9 @@ function CartElement() {
   const [billingStates, setBillingStates] = useState("");
   const [billingCities, setBillingCities] = useState("");
   const [same, setSame] = useState(true);
+
   const { cart, setCart } = useContext(CardContext);
+
   const { user } = useContext(AuthContext);
 
   // showing alert
@@ -255,13 +257,15 @@ function CartElement() {
     formData.append(`data`, JSON.stringify(order));
 
     if (order.orderInfo.paymentInfo) {
-      order?.products.map((prod, index) =>
-        formData.append(
-          `files.products[${index}].file`,
-          prod.file,
-          prod.file.name
-        )
-      );
+      order?.products.map((prod, index) => {
+        if (prod.file !== null) {
+          formData.append(
+            `files.products[${index}].file`,
+            prod.file,
+            prod.file.name
+          );
+        }
+      });
 
       postOrder();
     }
@@ -369,7 +373,7 @@ function CartElement() {
           <h3 className="font-bold text-[1.2rem] my-[1rem]  ">
             {cart.length != 0 ? "Products" : "Your Cart is Empty!"}
           </h3>
-          {cart !== []
+          {cart.length !== 0
             ? cart.map((data, index) => (
                 <Card className="w-96 my-6  relative" key={index}>
                   <MdDeleteForever

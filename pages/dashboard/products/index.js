@@ -15,7 +15,7 @@ import DataTable from "react-data-table-component";
 import { Button, Card, CardBody, Chip, Input } from "@material-tailwind/react";
 
 // imports react pdf
-import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { StyleSheet } from "@react-pdf/renderer";
 
 // style sheet for pdf
 const styles = StyleSheet.create({
@@ -46,7 +46,7 @@ function index() {
     Title: "",
     Description: "",
     Cetegory: "",
-    Slug: "",
+    basePrice: "",
   };
 
   const [product, setProduct] = useState(inital);
@@ -330,14 +330,15 @@ function index() {
                   />
 
                   <Input
+                    type="number"
                     required
                     disabled={isFatching}
-                    label="Slug"
-                    value={product?.Slug}
+                    label="Base Price"
+                    value={product?.basePrice}
                     onChange={(e) =>
                       setProduct({
                         ...product,
-                        Slug: e.target.value,
+                        basePrice: e.target.value,
                       })
                     }
                   />

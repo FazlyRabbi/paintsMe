@@ -232,6 +232,19 @@ function index() {
     downloadLink.click();
   };
 
+  const checkDwonloadFile = (product) => {
+    if (product.file?.data !== null) {
+      finalDownload(product.file?.data.attributes);
+    } else {
+      setDownloadDialog(false);
+      showAlert({
+        icon: "warning",
+        text: "This order has no file!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+  };
   // handle status change
 
   const handleStatus = async (action, data) => {
@@ -601,7 +614,7 @@ function index() {
                   </div>
 
                   <Chip
-                    onClick={() => finalDownload(product.file?.data.attributes)}
+                    onClick={() => checkDwonloadFile(product)}
                     value="Dwonlod"
                     className=" cursor-pointer  block  capitalize shadow-md active:shadow-sm  text-sm  max-w-[5rem] "
                   />
@@ -713,7 +726,6 @@ function index() {
             </div>
           </DialogBody>
         </Dialog>
-   
       </div>
     </>
   );
