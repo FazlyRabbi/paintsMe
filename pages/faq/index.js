@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterNew from "@/components/FooterNew";
 import { Accordion } from "flowbite-react";
 
 export default function Faq() {
@@ -313,7 +313,7 @@ export default function Faq() {
           </div>
         </div>
       </div>
-      <Footer />
+      <FooterNew />
     </section>
   );
 }

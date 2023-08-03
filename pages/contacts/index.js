@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterNew from "@/components/FooterNew";
 import Styles from "@/styles/Home.module.css";
 import Map from "@/components/Main";
 import GoogleMapReact from "google-map-react";
@@ -94,7 +94,7 @@ function contacts() {
           </div>
         </div>
       </div>
-      <Footer />
+      <FooterNew />
     </section>
   );
 }

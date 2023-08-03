@@ -342,6 +342,19 @@ function index() {
                     }
                   />
 
+                  <Input
+                    required
+                    disabled={isFatching}
+                    label="Slug"
+                    value={product?.Slug}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        Slug: e.target.value,
+                      })
+                    }
+                  />
+
                   <Button type="submit" size="md" disabled={isFatching}>
                     {isFatching ? (
                       <span className=" animate-ping">loading..</span>

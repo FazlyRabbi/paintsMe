@@ -7,8 +7,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 SwiperCore.use([Navigation, Autoplay]);
 
 function TopSellingItems() {
-  const { products } = useContext(SidebarContext);
 
+  const { products } = useContext(SidebarContext);
   const [splitProducts, setSplitProducts] = useState([]);
 
   useEffect(() => {

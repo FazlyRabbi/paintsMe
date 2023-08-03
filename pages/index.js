@@ -2,7 +2,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../img/logo.png";
-import { MdAccountCircle, MdPhoneCallback, MdEmail } from "react-icons/md";
+import {  MdPhoneCallback, MdEmail } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { AiFillClockCircle } from "react-icons/ai";
 import { Navbar } from "flowbite-react";
@@ -12,25 +12,17 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import ServiceAccordion from "@/components/ServiceAccordion";
 import TopSellingItems from "@/components/TopSellingItems";
 import { FaStar } from "react-icons/fa";
-import { FaTruckPickup } from "react-icons/fa";
-import { FaArrowAltCircleUp } from "react-icons/fa";
-import { FaHeadphones } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
-import NewsLetter from "@/components/NewsLetter";
-import ProductSlider from "@/components/ProductSlider";
 import FooterNew from "@/components/FooterNew";
 import BannerSlider from "@/components/BannerSlider";
-import BannerSlideMobile from "@/components/BannerSlideMobile";
 
 // import images
-import image1 from "../img/banner/unnamed1.png";
 import image2 from "../img/banner/unnamed2.png";
 import image3 from "../img/banner/unnamed3.png";
 import image4 from "../img/banner/unnamed4.png";
-import image5 from "../img/banner/unnamed5.png";
+import letterhead from "../img/banner/letterhead.jpg";
+import menu from "../img/banner/menu-9.jpg";
 
 export default function Home() {
   return (
@@ -120,17 +112,10 @@ export default function Home() {
                   <Link href={"/contacts"} className="font-bold text-[14px]">
                     Contact
                   </Link>
-                  <Link href={"/contacts"} className="font-bold text-[14px]">
-                    Our Catalog
-                  </Link>
                 </Navbar.Collapse>
 
                 <div className="dropdown  hidden lg:block  font-bold cursor-pointer">
                   <ul className="flex  space-x-3">
-                    <li className=" px-3 flex   items-center">
-                      <MdAccountCircle className=" text-[1.3rem] mr-1" />
-                      <span>Account</span>
-                    </li>
                     <li>
                       <Link href={"/shop"}>
                         <button className="bg-primary text-white p-2 rounded-lg cursor-pointer">
@@ -147,38 +132,29 @@ export default function Home() {
       </header>
 
       <section>
-        <div className="hidden lg:block">
+        <div>
           <BannerSlider />
         </div>
-        <div className="block lg:hidden">
+        {/* <div className="block lg:hidden">
           <BannerSlideMobile />
-        </div>
+        </div> */}
+
         <div className="bg-[#f5f7fa] px-6 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 text-[18px]">
-            <div className="flex flex-col md:flex-row items-center px-2">
-              <FaTruckPickup className="w-10" />
-              <p className="text-sm md:text-base">Free delivery worldwide</p>
-            </div>
-            <div className="flex  flex-col md:flex-row items-center px-2">
-              <FaArrowAltCircleUp className="w-10" />
-              <p className="text-sm md:text-base">30 day online returns</p>
-            </div>
-            <div className="flex  flex-col md:flex-row  items-center px-2">
-              <FaHeadphones className="w-10" />
-              <p className="text-sm md:text-base">Top-notch support</p>
-            </div>
-            <div className="flex  flex-col md:flex-row items-center px-2">
-              <FaLock className="w-10" />
-              <p className="text-sm md:text-base">Low price guarantee</p>
-            </div>
-          </div>
+          <p className="text-[25px] text-center md:text-[40px] font-semibold mb-4">
+            <span className="text-primary">Our Business </span> Brandings
+          </p>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-16 gap-7 mx-2">
             <div className="col-span-1 xl:col-span-2 row-span-1 xl:row-span-2 relative flex">
-              <button className="bg-white text-gray-800 px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
-                Brochure
-              </button>
+              <Link
+                href={`/shop/business%20card%20/menu/%20flayer/menu`}
+                className="bg-white text-gray-800 px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white"
+              >
+                Menu
+              </Link>
+
               <Image
-                src={image5}
+                src={menu}
                 className="rounded-3xl shadow-md border"
                 alt="img"
                 height={400}
@@ -186,9 +162,12 @@ export default function Home() {
               />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
-              <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
+              <Link
+                href={`/shop/business%20card%20/menu/%20flayer/business%20cards`}
+                className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white"
+              >
                 Business Cards
-              </button>
+              </Link>
               <Image
                 src={image4}
                 className="rounded-3xl  shadow-md border w-full"
@@ -198,9 +177,12 @@ export default function Home() {
               />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
-              <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
+              <Link
+                href={`/shop/business%20card%20/menu/%20flayer/door%20hangers`}
+                className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white"
+              >
                 Door Hangers
-              </button>
+              </Link>
               <Image
                 src={image3}
                 className="rounded-3xl   shadow-md border w-full"
@@ -208,9 +190,12 @@ export default function Home() {
               />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
-              <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
+              <Link
+                href={`/shop/business%20card%20/menu/%20flayer/flyers`}
+                className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white"
+              >
                 FLyers
-              </button>
+              </Link>
               <Image
                 src={image2}
                 className="rounded-3xl w-full shadow-md border "
@@ -218,11 +203,14 @@ export default function Home() {
               />
             </div>
             <div className="col-span-1 xl:col-span-1 row-span-1 xl:row-span-1 relative flex">
-              <button className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white">
-                Booklets
-              </button>
+              <Link
+                href={`/shop/business%20card%20/menu/%20flayer/letterheads`}
+                className="bg-white px-5 py-2.5 text-titleSm md:text-xl font-semibold rounded-3xl absolute block bottom-5 left-1/2 -translate-x-1/2 hover:bg-deep-purple-800 hover:text-white"
+              >
+                Letterheads
+              </Link>
               <Image
-                src={image5}
+                src={letterhead}
                 className="rounded-3xl w-full shadow-md border "
                 alt="img"
               />
@@ -494,6 +482,7 @@ export default function Home() {
             <p className="text-gray-500">Senior Artist Developer</p>
           </div>
         </div>
+
         <div className="bg-[#f5f7fa] px-7 py-20 grid grid-cols-1 lg:grid-cols-2 gap-6 ">
           <div className="relative mx-auto">
             <p className="text-white text-sm md:text-base font-semibold tracking-widest uppercase absolute top-6 md:top-9 lg:top-12 xl:top-16 left-10">
@@ -502,9 +491,12 @@ export default function Home() {
             <p className="text-white font-bold text-xl md:text-[28px] absolute left-10 top-10 sm:top-14 md:top-16 lg:top-20 xl:top-24">
               Standard Business <br /> Cards
             </p>
-            <button className="text-white border border-white sm:bg-white sm:text-gray-800 px-5 py-1.5 sm:px-5 sm:py-2.5 text-titleSm sm:text-[18px] font-semibold rounded-3xl absolute block  top-28 sm:top-36 md:top-40 lg:top-44 xl:top-52 left-10 ">
+            <Link
+              href={`/shop/business%20card%20/menu/%20flayer/menu`}
+              className="text-white border border-white sm:bg-white sm:text-gray-800 px-5 py-1.5 sm:px-5 sm:py-2.5 text-titleSm sm:text-[18px] font-semibold rounded-3xl absolute block  top-28 sm:top-36 md:top-40 lg:top-44 xl:top-52 left-10 "
+            >
               Explore More
-            </button>
+            </Link>
             <img
               src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_banner2.jpg"
               className="rounded-3xl"
@@ -518,9 +510,12 @@ export default function Home() {
             <p className="text-white font-bold text-xl md:text-[28px] absolute left-10 top-10 sm:top-14 md:top-16 lg:top-20 xl:top-24">
               Booklet and <br /> log printing
             </p>
-            <button className="text-white border border-white sm:bg-white sm:text-gray-800 px-5 py-1.5 sm:px-5 sm:py-2.5 text-titleSm sm:text-[18px] font-semibold rounded-3xl absolute block  top-28 sm:top-36 md:top-40 lg:top-44 xl:top-52 left-10 ">
+            <Link
+              href={`/shop/business%20card%20/menu/%20flayer/letterheads`}
+              className="text-white border border-white sm:bg-white sm:text-gray-800 px-5 py-1.5 sm:px-5 sm:py-2.5 text-titleSm sm:text-[18px] font-semibold rounded-3xl absolute block  top-28 sm:top-36 md:top-40 lg:top-44 xl:top-52 left-10 "
+            >
               Explore More
-            </button>
+            </Link>
             <img
               src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_banner3.jpg"
               className="rounded-3xl"
@@ -560,7 +555,7 @@ export default function Home() {
         </div> */}
 
         {/* blog posts */}
-        <div className="bg-[#f5f7fa] px-7 gap-6 py-20 grid grid-cols-1 md:grid-cols-3">
+        {/* <div className="bg-[#f5f7fa] px-7 gap-6 py-20 grid grid-cols-1 md:grid-cols-3">
           <div className="pt-10 pr-8">
             <p className="text-primary text-base font-semibold tracking-widest uppercase ">
               MOST RECENT NEWS
@@ -625,7 +620,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* <div className="bg-[#f5f7fa] px-7 py-1">
           <div className="text-center">
@@ -715,19 +710,3 @@ export default function Home() {
     </section>
   );
 }
-
-// export async function getStaticProps() {
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
-//   const res = await fetch(
-//     "https://demo-production-edcf.up.railway.app/api/people"
-//   );
-//   const people = await res.json();
-
-//   // By returning { props: { posts } }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: { people },
-//     revalidate: 3,
-//   };
-// }

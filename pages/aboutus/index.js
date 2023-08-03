@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterNew from "@/components/FooterNew";
 import aboutImage from "../../img/aboutus.jpg";
 import Image from "next/image";
 import AboutSlider from "@/components/AboutSlider";
@@ -99,7 +99,7 @@ export default function AboutUs() {
           view more
         </button>
       </div>
-      <Footer />
+      <FooterNew />
     </section>
   );
 }
