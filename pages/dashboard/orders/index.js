@@ -380,7 +380,7 @@ function index() {
           id="grid-state"
           onChange={(status) => handleStatus(status.target.value, row)}
         >
-          <option defaultChecked>Meaking</option>
+          <option defaultChecked>Processing</option>
           <option>On Way</option>
           <option>Shipped</option>
         </select>

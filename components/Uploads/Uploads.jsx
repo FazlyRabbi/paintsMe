@@ -88,10 +88,10 @@ function Uploads() {
                 placeholder="Upload File"
                 className=" rounded-md z-5"
               />
-              <span className=" px-10 flex    -z-10 absolute py-2 rounded-md  px- top-0 left-0 space-x-4 bg-gray-700  text-white ">
+              {/* <span className=" px-10 flex    -z-10 absolute py-2 rounded-md  px- top-0 left-0 space-x-4 bg-gray-700  text-white ">
                 <BiUpload className="text-[1.3rem] mr-1 block" />
                 Select File
-              </span>
+              </span> */}
             </div>
             <div className="flex justify-center  mt-[4rem]">
               <button
