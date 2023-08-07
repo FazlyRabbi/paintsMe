@@ -71,7 +71,7 @@ export default function Home() {
                   <AiFillClockCircle className="text-[1.5rem]" />
                   <div>
                     <p className="text-[12px]  hidden lg:block  leading-tight font-bold">
-                      Mon-Fri9.00am-5.00pm
+                      Mon-Fri 9.00am-5.00pm
                       <span className="block text-[10px] font-normal">
                         Sat-Sun Closed
                       </span>
@@ -98,6 +98,8 @@ export default function Home() {
                 <Navbar.Toggle />
 
                 <Navbar.Collapse>
+                  <div className=" flex  items-center  space-x-14">
+
                   <Link href={"/"} className="font-bold text-[14px]">
                     Home
                   </Link>
@@ -112,6 +114,7 @@ export default function Home() {
                   <Link href={"/contacts"} className="font-bold text-[14px]">
                     Contact
                   </Link>
+                  </div>
                 </Navbar.Collapse>
 
                 <div className="dropdown  hidden lg:block  font-bold cursor-pointer">

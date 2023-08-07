@@ -43,7 +43,7 @@ export default function AboutUs() {
       <div className="about-slider">
         <AboutSlider />
       </div>
-      <div className="about-team container mx-auto p-10 mt-10  text-center">
+      {/* <div className="about-team container mx-auto p-10 mt-10  text-center">
         <div className="team-content flex justify-center  text-center    ">
           <div className="content-main">
             <h4 className=" tracking-wider text-primary mb-1">
@@ -98,7 +98,7 @@ export default function AboutUs() {
         >
           view more
         </button>
-      </div>
+      </div> */}
       <FooterNew />
     </section>
   );
