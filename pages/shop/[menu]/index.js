@@ -6,6 +6,8 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
+
+
 export default function productDetails() {
   const route = useRouter();
 

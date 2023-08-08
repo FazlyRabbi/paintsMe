@@ -5,6 +5,7 @@ import { createContext, useEffect, useState } from "react";
 export const CardContext = createContext();
 
 export const CardProvider = ({ children }) => {
+
   const init = [];
 
   const [cart, setCart] = useState(init);
@@ -12,9 +13,11 @@ export const CardProvider = ({ children }) => {
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
+
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
+    
   }, []);
 
   return (

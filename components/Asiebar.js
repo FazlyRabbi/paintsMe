@@ -3,7 +3,10 @@ import Link from "next/link";
 import { useContext } from "react";
 import styles from "../styles/Home.module.css";
 
-function Sidebar() {
+import 'react-loading-skeleton/dist/skeleton.css'
+
+function Asiebar() {
+
   const { sidebars } = useContext(SidebarContext);
 
   return (
@@ -46,4 +49,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default Asiebar;

@@ -2,15 +2,14 @@ import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../img/logo.png";
-import {  MdPhoneCallback, MdEmail } from "react-icons/md";
+import { MdPhoneCallback, MdEmail } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { AiFillClockCircle } from "react-icons/ai";
 import { Navbar } from "flowbite-react";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper/core";
+import { Swiper, SwiperSlide } from "swiper/react";
+SwiperCore.use([Navigation, Autoplay, Pagination]);
 
 import TopSellingItems from "@/components/TopSellingItems";
 import { FaStar } from "react-icons/fa";
@@ -99,21 +98,20 @@ export default function Home() {
 
                 <Navbar.Collapse>
                   <div className=" flex  items-center  space-x-14">
+                    <Link href={"/"} className="font-bold text-[14px]">
+                      Home
+                    </Link>
 
-                  <Link href={"/"} className="font-bold text-[14px]">
-                    Home
-                  </Link>
+                    <Link href={"/shop"} className="font-bold text-[14px]">
+                      Our Services
+                    </Link>
+                    <Link href={"/aboutus"} className="font-bold text-[14px]">
+                      About Us
+                    </Link>
 
-                  <Link href={"/shop"} className="font-bold text-[14px]">
-                    Our Services
-                  </Link>
-                  <Link href={"/aboutus"} className="font-bold text-[14px]">
-                    About Us
-                  </Link>
-
-                  <Link href={"/contacts"} className="font-bold text-[14px]">
-                    Contact
-                  </Link>
+                    <Link href={"/contacts"} className="font-bold text-[14px]">
+                      Contact
+                    </Link>
                   </div>
                 </Navbar.Collapse>
 
@@ -138,9 +136,6 @@ export default function Home() {
         <div>
           <BannerSlider />
         </div>
-        {/* <div className="block lg:hidden">
-          <BannerSlideMobile />
-        </div> */}
 
         <div className="bg-[#f5f7fa] px-6 py-16">
           <p className="text-[25px] text-center md:text-[40px] font-semibold mb-4">
@@ -462,28 +457,136 @@ export default function Home() {
 
         {/* testimonial */}
         <div className="bg-[#edeef1] py-20">
-          <div className="text-center gap-1 flex justify-center text-yellow-300 ">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </div>
-          <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
-            <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
-              “All good thanks. Delay with delivery probably a knock-on from
-              strikes...but there was no way to track the parcel via the website
-              so we didn't know that it would be a couple of days late....just
-              that it was delayed.”
-            </p>
-            <img
-              src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h2_avatar-1.png"
-              className="mx-auto mt-10 mb-6 w-28"
-              alt=""
-            />
-            <p className="text-xl text-gray-900 font-medium">Jessica Cherner</p>
-            <p className="text-gray-500">Senior Artist Developer</p>
-          </div>
+          <Swiper
+            centeredSlides={true}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            pagination={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="  w-full"
+          >
+            <SwiperSlide className=" w-full">
+              <div>
+                <div className="text-center gap-1 flex justify-center text-yellow-300 ">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
+                    Amazing place really nice people. Christina at the front
+                    desk will get you situated she’s patient calm and
+                    understanding. I’d recommend this place anytime😌
+                  </p>
+
+                  <p className="text-xl text-gray-900 font-medium">Tee Mil</p>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide className=" w-full">
+              <div>
+                <div className="text-center gap-1 flex justify-center text-yellow-300 ">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
+                    Theeeee best with fast turn around and excellent pricing
+                    placed many orders with this company.
+                  </p>
+
+                  <p className="text-xl text-gray-900 font-medium">
+                    Jessica Cherner
+                  </p>
+                  <p className="text-gray-500">Local Guide</p>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide className=" w-full">
+              <div>
+                <div className="text-center gap-1 flex justify-center text-yellow-300 ">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
+                    Great printing always ! Fast service nice workers . Thanks
+                    so much
+                  </p>
+
+                  <p className="text-xl text-gray-900 font-medium">
+                    Jessica Cherner
+                  </p>
+                  <p className="text-gray-500">Jas Andreya</p>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide className=" w-full">
+              <div>
+                <div className="text-center gap-1 flex justify-center text-yellow-300 ">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
+                    The entire team at NP&G are top notch! They responded to my
+                    request quickly and with accuracy. The final products were
+                    printed on time and most importantly was the quality!! I
+                    purchased a fitted table cloth, wall banner, and sticker
+                    labels and was literally “impressed” with the presentation
+                    and high quality of the items. I am soo excited I decided to
+                    use their service and will definitely be using them again!
+                    Thank you so much!
+                  </p>
+
+                  <p className="text-xl text-gray-900 font-medium">
+                    Jessica Cherner
+                  </p>
+                  <p className="text-gray-500">Chriss Garzon</p>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide className=" w-full">
+              <div>
+                <div className="text-center gap-1 flex justify-center text-yellow-300 ">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className="w-3/5 mx-auto text-center bg-[url('https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h4_bg1.png')] bg-no-repeat">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-gray-800 my-7">
+                    I placed an order for banner and canopies and their work is
+                    immaculate and they delivered it on time as promised and
+                    fair pricing. Will recommend this guys to everyone.
+                  </p>
+
+                  <p className="text-xl text-gray-900 font-medium">
+                  Sandeep Gill
+                  </p>
+                  <p className="text-gray-500">Singh</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
 
         <div className="bg-[#f5f7fa] px-7 py-20 grid grid-cols-1 lg:grid-cols-2 gap-6 ">
@@ -526,188 +629,7 @@ export default function Home() {
             />
           </div>
         </div>
-        {/* service accordion */}
-        {/* <div className="bg-[#f5f7fa] px-7 py-20">
-          <div className="text-center mb-10">
-            <p className="text-[25px] md:text-[40px] font-semibold mb-4">
-              {" "}
-              Quality printing and{" "}
-              <span className="text-primary">
-                outstanding <br /> customer{" "}
-              </span>{" "}
-              service
-            </p>
-            <p className="text-titleSm font-light">
-              The educational printing services offered by Print Design make us
-              one of the most <br />
-              trusted and sought-after graphic design and printing companies
-              around.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="mx-auto">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h6_img1.png"
-                alt=""
-              />
-            </div>
-            <div>
-              <ServiceAccordion />
-            </div>
-          </div>
-        </div> */}
 
-        {/* blog posts */}
-        {/* <div className="bg-[#f5f7fa] px-7 gap-6 py-20 grid grid-cols-1 md:grid-cols-3">
-          <div className="pt-10 pr-8">
-            <p className="text-primary text-base font-semibold tracking-widest uppercase ">
-              MOST RECENT NEWS
-            </p>
-            <p className="text-gray-900 font-bold text-[32px] mt-5">
-              Read our latest <br /> blog posts{" "}
-            </p>
-            <p className="text-gray-600 my-8">
-              We have all the equipment, know-how and every thing you will need
-              to receive fast, reliable printing services with high quality
-              results.
-            </p>
-            <button className="bg-primary text-white hover:bg-black px-7 py-3 text-[16px] font-semibold rounded-3xl mt-4">
-              More Blog
-            </button>
-          </div>
-          <div>
-            <div className="relative">
-              <div className="absolute left-8 top-8 bg-[#1ea856] text-white font-bold text-titleSm p-3 rounded-3xl uppercase">
-                <span className="font-extrabold text-[22px]">06</span> <br />{" "}
-                Mar
-              </div>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/blog_10-820x600.jpg"
-                className="rounded-3xl"
-                alt="img"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-primary font-semibold text-sm hover:underline">
-                Printec
-              </p>
-              <p className="text-gray-900 font-bold text-xl hover:text-primary mt-3">
-                Tips to Find Best Print on Demand Business Name Ideas
-              </p>
-              <button className=" text-gray-800 mt-5 text-titleSm font-semibold  hover:text-primary">
-                Read More
-              </button>
-            </div>
-          </div>
-          <div>
-            <div className="relative">
-              <div className="absolute left-8 top-8 bg-[#1ea856] text-white font-bold text-titleSm p-3 rounded-3xl uppercase">
-                <span className="font-extrabold text-[22px]">06</span> <br />{" "}
-                Mar
-              </div>
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/blog_9-820x600.jpg"
-                className="rounded-3xl"
-                alt="img"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-primary font-semibold text-sm hover:underline">
-                Printec
-              </p>
-              <p className="text-gray-900 font-bold text-xl hover:text-primary mt-3">
-                Tips to Find Best Print on Demand Business Name Ideas
-              </p>
-              <button className=" text-gray-800 mt-5 text-titleSm font-semibold  hover:text-primary">
-                Read More
-              </button>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="bg-[#f5f7fa] px-7 py-1">
-          <div className="text-center">
-            <p className="text-[25px] md:text-[40px] font-semibold mb-4">
-              Sign up for{" "}
-              <span className="text-primary">
-                exclusive <br /> offers
-              </span>{" "}
-              from us
-            </p>
-          </div>
-          <>
-            <NewsLetter />
-          </>
-        </div> */}
-
-        {/* <div className="hidden lg:block">
-          <div className="grid grid-cols-5 bg-[#f5f7fa] px-7 gap-6 py-20">
-            <div className="relative">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h5_gallery2.jpg"
-                alt="Avatar"
-                className="opacity-100  block w-full h-auto ease-in rounded-3xl"
-              />
-              <div className="ease-in opacity-0 hover:opacity-90 absolute top-0 left-0 bottom-0 right-0 bg-black h-full w-full rounded-3xl">
-                <button className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-100 px-5 py-3 rounded-full text-xl">
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h5_gallery4.jpg"
-                alt="Avatar"
-                className="opacity-100  block w-full h-auto ease-in rounded-3xl"
-              />
-              <div className="ease-in opacity-0 hover:opacity-90 absolute top-0 left-0 bottom-0 right-0 bg-black h-full w-full rounded-3xl">
-                <button className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-100 px-5 py-3 rounded-full text-xl">
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h5_gallery1.jpg"
-                alt="Avatar"
-                className="opacity-100  block w-full h-auto ease-in rounded-3xl"
-              />
-              <div className="ease-in opacity-0 hover:opacity-90 absolute top-0 left-0 bottom-0 right-0 bg-black h-full w-full rounded-3xl">
-                <button className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-100 px-5 py-3 rounded-full text-xl">
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h5_gallery3.jpg"
-                alt="Avatar"
-                className="opacity-100  block w-full h-auto ease-in rounded-3xl"
-              />
-              <div className="ease-in opacity-0 hover:opacity-90 absolute top-0 left-0 bottom-0 right-0 bg-black h-full w-full rounded-3xl">
-                <button className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-100 px-5 py-3 rounded-full text-xl">
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://demo2.pavothemes.com/printec/wp-content/uploads/2023/02/h5_gallery5.jpg"
-                alt="Avatar"
-                className="opacity-100  block w-full h-auto ease-in rounded-3xl"
-              />
-              <div className="ease-in opacity-0 hover:opacity-90 absolute top-0 left-0 bottom-0 right-0 bg-black h-full w-full rounded-3xl">
-                <button className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-100 px-5 py-3 rounded-full text-xl">
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className=" bg-[#f5f7fa] block lg:hidden py-16">
-          <ProductSlider />
-        </div> */}
         <FooterNew />
       </section>
     </section>

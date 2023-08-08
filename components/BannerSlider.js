@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { API_TOKEN, API_URL } from "../config";
-import hero3 from "../img/rev_home6_2.jpg";
+
+
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 SwiperCore.use([Navigation, Autoplay, Pagination]);
 
 function BannerSlider() {
@@ -22,6 +26,8 @@ function BannerSlider() {
       .catch((err) => console.error(err));
   }, []);
 
+
+
   return (
     <Swiper
       pagination={true}
@@ -33,7 +39,7 @@ function BannerSlider() {
       modules={[Autoplay, Pagination]}
       className=" max-h-[35rem] w-full"
     >
-      {sliders &&
+      {sliders ? (
         sliders.map((slider, index) => (
           <SwiperSlide key={index} className=" w-full">
             <div
@@ -44,27 +50,14 @@ function BannerSlider() {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
               }}
-            >
-              {/* <div className="text-left px-4 py-8 md:px-7 md:py-12 lg:px-14 lg:py-20 w-1/2">
-                <p className="text-black font-semibold tracking-widest uppercase text-sm mt-2">
-                  Custom Boxes
-                </p>
-                <p className="text-black font-extrabold text-[28px] md:text-[32px] lg:text-[40px] mt-6">
-                  Customized bulk <br /> Paper bags
-                </p>
-                <p className="text-black font-normal mt-6">
-                  Turn your ideas into premium products that <br /> leave a
-                  lasting impression{" "}
-                </p>
-                <button className="bg-white text-gray-800 px-7 py-2.5 text-[18px] font-semibold rounded-3xl mt-10">
-                  Shop now
-                </button>
-              </div> */}
-
-
-            </div>
+            ></div>
           </SwiperSlide>
-        ))}
+        ))
+      ) : (
+        <SkeletonTheme height={650} baseColor="#202020" highlightColor="#444">
+          <Skeleton count={1} circle={false} />
+        </SkeletonTheme>
+      )}
     </Swiper>
   );
 }

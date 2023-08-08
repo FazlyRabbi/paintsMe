@@ -4,6 +4,9 @@ import Styles from "@/styles/Home.module.css";
 import Map from "@/components/Main";
 import GoogleMapReact from "google-map-react";
 
+
+
+
 function contacts() {
   const defaultProps = {
     center: {

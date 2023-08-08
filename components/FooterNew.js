@@ -15,10 +15,14 @@ export default function FooterNew() {
               information
             </h3>
             <ul className=" capitalize mt-2">
-              <li className="mb-2">13220 Jamaica Ave, Queens, NY 11418`</li>
+              <li className="mb-2">Nprintandgraph companie </li>
 
-              <li className="mb-2">nprintandgraph@gmail.com</li>
-              <li className="mb-2">929 217-6589</li>
+              <li className="mb-2">
+                From NEW PRINT AND GRAPH "BANNERS, STICKERS, TABLE CLOTHES,
+                FLAGS, BACK DROPS, SWIFT BANNERS, STEP AND REPEAT, DECALS,
+                BUSINESS CARDS, MENU CARDS"
+              </li>
+              {/* <li className="mb-2">929 217-6589</li> */}
             </ul>
 
             <div className="mt-5 md:mt-8 ">
@@ -58,28 +62,40 @@ export default function FooterNew() {
             <ul className=" capitalize mt-2">
               {/* <li className="mb-2">My Account</li> */}
               {/* <li className="mb-2">Order tracking</li> */}
+              <li className="mb-2 cursor-pointer">
+                <Link href={`/contacts`}>Blog</Link>
+              </li>
+
               <li className="mb-2">
                 <Link href={`/shop`}> All Product</Link>
               </li>
               <li className="mb-2">
                 <Link href={`/shop`}>All Service</Link>
               </li>
+              <li className="mb-2 cursor-pointer">
+                <Link href={`/contacts`}>Help Center</Link>
+              </li>
               {/* <li className="mb-2">Service Details</li> */}
             </ul>
           </div>
           <div className="info">
             <h3 className="info-title text-[25px] font-bold capitalize">
-              About Us
+              Get Started
             </h3>
 
             <ul className=" capitalize mt-3">
-              {/* <li className="mb-2">Our Story</li> */}
               <li className="mb-2 cursor-pointer">
-                <Link href={`/contacts`}>Contact</Link>
+                <Link href={`/contacts`}>Privacy Policy </Link>
               </li>
-              {/* <li className="mb-2">Affiliate Program</li> */}
-              {/* <li className="mb-2">Referral Program</li> */}
-              {/* <li className="mb-2">Career</li> */}
+              <li className="mb-2 cursor-pointer">
+                <Link href={`/contacts`}>Terms and Conditions</Link>
+              </li>
+              <li className="mb-2 cursor-pointer">
+                <Link href={`/contacts`}>Refund Policy</Link>
+              </li>
+              <li className="mb-2 cursor-pointer">
+                <Link href={`/contacts`}>Shipping Policy</Link>
+              </li>
             </ul>
           </div>
         </div>
