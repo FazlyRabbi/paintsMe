@@ -47,13 +47,13 @@ function TopSellingItems() {
       {splitProducts &&
         splitProducts?.map((product, index) => (
           <SwiperSlide key={index} className="rounded-3xl">
-            <div className="p-4">
+            <div className="p-4 ">
               <Image
                 src={product?.attributes?.Thubmnails_1?.data?.attributes?.url}
-                height={300}
+                height={200}
                 width={300}
                 alt="product banner"
-                className=" rounded-3xl"
+                className=" rounded-3xl max-h-[12rem]"
               />
               <p className="mt-5">{product?.attributes.Title}</p>
               <p className="mt-3">$17.00</p>

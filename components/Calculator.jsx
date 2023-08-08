@@ -16,6 +16,7 @@ export default function Calculator({ product }) {
   const [error, setError] = useState(null);
   const [widthError, setWidthError] = useState(null);
   const [heightError, setHeightError] = useState(null);
+  const [price, setPrice] = useState(0);
 
   // Ensure that the price is a valid number before setting it to the state
   // const initialPrice =
@@ -23,19 +24,13 @@ export default function Calculator({ product }) {
   //     ? product.attributes.basePrice
   //     : 0;
   // const [price, setPrice] = useState(initialPrice);
-  let price = 0;
 
   useEffect(() => {
-    // Update the price state when the product attributes change
+    // // Update the price state when the product attributes change
     if (typeof product?.attributes?.basePrice === "number") {
-      price = product?.attributes?.basePrice;
+      setPrice(product.attributes.basePrice);
     }
-  }, [product?.attributes?.basePrice]);
-  // input dynamic price form server
-  // useEffect(() => {
-  //   const price = product?.attributes?.basePrice;
-  //   setPrice(price);
-  // }, [product?.attributes?.basePrice]);
+  }, [product]);
 
   const inital = {
     width_length: "1' x 1'",
@@ -51,9 +46,6 @@ export default function Calculator({ product }) {
   };
 
   const [calData, setCalData] = useState(inital);
-
-  // make the main calculations
-  // const price = 125; //10 doller
 
   const calculation = () => {
     // convert string to number
@@ -96,12 +88,13 @@ export default function Calculator({ product }) {
       const totalPrice =
         (area * price + rainforce + production + color + lamination) * quantity;
 
+      console.log(price);
       return totalPrice;
     }
   };
 
   useEffect(() => {
-    if (typeof product?.attributes?.basePrice === "number") {
+    if (price > 0) {
       const totalPrice = calculation();
       setCalData({ ...calData, total: totalPrice.toString() });
     }
@@ -115,11 +108,10 @@ export default function Calculator({ product }) {
     calData.production_time,
     calData.customWidth,
     calData.customHeight,
-    product?.attributes?.basePrice,
+    price,
   ]);
 
   // set quantity
-
   const handleQuantity = (e) => {
     if (e.target.value > 0) {
       setCalData({

@@ -18,7 +18,7 @@ export default function SingleProduct({ details }) {
 
   return (
     <section className="product  cursor-pointer  ">
-      <Card className="max-w-[25rem] overflow-hidden rounded-md">
+      <Card className="max-w-[25rem] max-h-[25rem] overflow-hidden rounded-md">
         <CardHeader
           floated={false}
           shadow={false}
@@ -33,6 +33,7 @@ export default function SingleProduct({ details }) {
               }`}
               width={400}
               height={400}
+           
               alt="ui/ux review check"
             />
           )}

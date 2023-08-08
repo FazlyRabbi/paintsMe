@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 export default function Shop() {
   const { products } = useContext(SidebarContext);
 
-  console.log(products);
+
 
   return (
     <Layout title={"shop"}>

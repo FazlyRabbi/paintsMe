@@ -26,7 +26,7 @@ export default function Header() {
     <>
       <ul className=" capitalize text-sm flex space-x-3 p-3 ">
         <li className="border-r border-white pr-2">
-          <Link href={"/shop"}>home</Link>
+          <Link href={"/"}>home</Link>
         </li>
 
         <li className="border-r border-white pr-2">

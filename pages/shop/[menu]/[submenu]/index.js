@@ -26,16 +26,6 @@ function index() {
         <Typography variant="h1" className={` my-3 text-[1.5rem]`}>
           {singleProduct && singleProduct.attributes.Title}
         </Typography>
-
-        <Breadcrumbs fullWidth>
-          <a href="#" className="opacity-60">
-            Docs
-          </a>
-          <a href="#" className="opacity-60">
-            Components
-          </a>
-          <a href="#">Breadcrumbs</a>
-        </Breadcrumbs>
       </div>
       <div className="wrapper p-4 grid xl:grid-cols-3 grid-cols-1 gap-16  ">
         <div className="xl:col-span-2 ">
