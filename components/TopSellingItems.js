@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 SwiperCore.use([Navigation, Autoplay]);
 
 function TopSellingItems() {
-
   const { products } = useContext(SidebarContext);
   const [splitProducts, setSplitProducts] = useState([]);
 
@@ -41,7 +40,6 @@ function TopSellingItems() {
       slidesPerView={4}
       spaceBetween={20}
       freeMode={true}
-      // modules={[ Pagination]}
       className=""
     >
       {splitProducts &&
@@ -56,7 +54,8 @@ function TopSellingItems() {
                 className=" rounded-3xl max-h-[12rem]"
               />
               <p className="mt-5">{product?.attributes.Title}</p>
-              <p className="mt-3">$17.00</p>
+
+              <p className="mt-3">{product?.attributes.basePrice}$</p>
               <button className=" mt-5 w-full bg-black text-white rounded-3xl py-2.5">
                 <Link
                   href={`/shop/${product?.attributes.Cetegory.toLowerCase()}/${

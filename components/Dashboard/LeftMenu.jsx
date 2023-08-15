@@ -1,20 +1,14 @@
 import React, { useContext } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
-
 import { AiOutlineLayout } from "react-icons/ai";
 import { TfiLayoutSlider } from "react-icons/tfi";
+import { GiPaintRoller } from "react-icons/gi";
+import { TiContacts } from "react-icons/ti";
 
-import {
-  MdOutlineStore,
-  MdOutlineNoteAlt,
-  MdProductionQuantityLimits,
-} from "react-icons/md";
-
+import { MdOutlineStore, MdProductionQuantityLimits } from "react-icons/md";
 
 import { useRouter } from "next/router";
-// import logo from "../../img/logo.png";
 
 function LeftMenu() {
   const router = useRouter();
@@ -84,6 +78,46 @@ function LeftMenu() {
             </div>
             Orders
           </Link>
+
+          <Link
+            href={`/dashboard/addporduct`}
+            className={`
+          
+           ${
+             router.pathname === "/dashboard/addporduct"
+               ? ` 
+           
+            rounded-lg
+
+            bg-white shadow-md`
+               : ""
+           }
+           
+           px-4 py-3
+          w-[90%] flex justify-left gap-3 items-center text-base  font-normal
+            
+            text-[#394B6B] capitalize `}
+          >
+            <div
+              className={`
+          
+            ${
+              router.pathname === "/dashboard/addporduct"
+                ? `
+            
+                bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+            
+            `
+                : ``
+            }
+          
+          p-[5px] rounded-lg shadow-md`}
+            >
+              <GiPaintRoller className="  text-[1.3rem]  text-inherit" />
+            </div>
+            Add Product
+          </Link>
+
           <Link
             href={`/dashboard/products`}
             className={`
@@ -201,6 +235,46 @@ function LeftMenu() {
               <TfiLayoutSlider className="  text-[1.3rem]  text-inherit" />
             </div>
             Home Slider
+          </Link>
+
+          {/* contacts */}
+          <Link
+            href={`/dashboard/contacts`}
+            className={`
+          
+           ${
+             router.pathname === "/dashboard/contacts"
+               ? ` 
+           
+            rounded-lg
+
+            bg-white shadow-md`
+               : ""
+           }
+           
+           px-4 py-3
+          w-[90%] flex justify-left gap-3 items-center text-base  font-normal
+            
+            text-[#394B6B] capitalize `}
+          >
+            <div
+              className={`
+          
+            ${
+              router.pathname === "/dashboard/contacts"
+                ? `
+            
+                bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+            
+            `
+                : ``
+            }
+          
+          p-[5px] rounded-lg shadow-md`}
+            >
+              <TiContacts className="  text-[1.3rem]  text-inherit" />
+            </div>
+            Contacts
           </Link>
         </div>
       </section>

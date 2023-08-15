@@ -3,11 +3,24 @@ import FooterNew from "@/components/FooterNew";
 import Styles from "@/styles/Home.module.css";
 import Map from "@/components/Main";
 import GoogleMapReact from "google-map-react";
-
-
-
+import { useState } from "react";
+import useSweetAlert from "@/components/lib/sweetalert2";
+import { API_TOKEN, API_URL } from "@/config/index";
 
 function contacts() {
+  const init = {
+    name: "",
+    email: "",
+    message: "",
+  };
+
+  // showing alert
+  const { showAlert } = useSweetAlert();
+
+  const [isFatching, setIsFatching] = useState(false);
+
+  const [contact, setContact] = useState(init);
+
   const defaultProps = {
     center: {
       lat: 10.99835602,
@@ -16,6 +29,51 @@ function contacts() {
     zoom: 11,
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setIsFatching(true);
+
+    const res = await fetch(`${API_URL}/api/contacts`, {
+      method: "POST",
+
+      headers: {
+        Authorization: API_TOKEN,
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({ data: contact }),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      setIsFatching(false);
+      showAlert({
+        icon: "success",
+        title: "Your Message has been Submitted!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+
+      setContact(init);
+    } else {
+      setIsFatching(false);
+      showAlert({
+        icon: "error",
+        title: "Something went wrong!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  };
+
+
+
+
+
+
+
   return (
     <section className="contacts">
       <Header />
@@ -23,14 +81,20 @@ function contacts() {
         <div className="contacts-box shadow-sm border p-[3rem]">
           <div className="w-full mt-4   ">
             <h4 className="font-bold text-[25px] mb-8">Get in Touch</h4>
-            <form action="submit">
+            <form action="submit" onSubmit={handleSubmit}>
               <input
                 className="appearance-none block w-full  bg-[#F4F6FA]
                  text-gray-700 border-gray-100 py-6  rounded-full px-6 mb-1 leading-tight   capitalize  focus:bg-white
                  focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                  "
                 id="grid-first-name"
+                required
                 type="text"
+                disabled={isFatching}
+                value={contact.name}
+                onChange={(e) =>
+                  setContact({ ...contact, name: e.target.value })
+                }
                 placeholder="your name"
               />
               <input
@@ -42,20 +106,36 @@ function contacts() {
                  "
                 id="grid-first-name"
                 type="email"
+                required
                 placeholder="Your e-mail"
+                disabled={isFatching}
+                value={contact.email}
+                onChange={(e) =>
+                  setContact({ ...contact, email: e.target.value })
+                }
               />
               <textarea
                 name="message"
                 id="message_257516765"
                 aria-required="true"
+                required
                 placeholder="Your message"
                 className=" mt-4 w-full rounded-[2rem] px-6 py-4 border-gray-100 h-44 bg-[#F4F6FA]
                 text-gray-700"
                 spellcheck="false"
+                disabled={isFatching}
+                value={contact.message}
+                onChange={(e) =>
+                  setContact({ ...contact, message: e.target.value })
+                }
               ></textarea>
 
-              <button className="text-white rounded-full bg-primary   px-10 py-3 mt-4">
-                Submit
+              <button
+                disabled={isFatching}
+                type="submit"
+                className="text-white rounded-full bg-primary   px-10 py-3 mt-4"
+              >
+                {isFatching ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>

@@ -3,8 +3,20 @@ import Link from "next/link";
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { TiDeleteOutline } from "react-icons/ti";
+import {
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
+  InboxIcon,
+  PowerIcon,
+} from "@heroicons/react/24/solid";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+
 
 export default function MobileNav({ open, setOpen }) {
+
+  
   const [height, setHeight] = useState(false);
 
   return (

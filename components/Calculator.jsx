@@ -18,13 +18,6 @@ export default function Calculator({ product }) {
   const [heightError, setHeightError] = useState(null);
   const [price, setPrice] = useState(0);
 
-  // Ensure that the price is a valid number before setting it to the state
-  // const initialPrice =
-  //   typeof product?.attributes?.basePrice === "number"
-  //     ? product.attributes.basePrice
-  //     : 0;
-  // const [price, setPrice] = useState(initialPrice);
-
   useEffect(() => {
     // // Update the price state when the product attributes change
     if (typeof product?.attributes?.basePrice === "number") {
@@ -88,7 +81,6 @@ export default function Calculator({ product }) {
       const totalPrice =
         (area * price + rainforce + production + color + lamination) * quantity;
 
-      console.log(price);
       return totalPrice;
     }
   };
@@ -97,6 +89,7 @@ export default function Calculator({ product }) {
     if (price > 0) {
       const totalPrice = calculation();
       setCalData({ ...calData, total: totalPrice.toString() });
+      console.log(product?.attributes);
     }
   }, [
     calData.width_length,
@@ -301,8 +294,12 @@ export default function Calculator({ product }) {
                 setCalData({ ...calData, reinforce: e.target.value })
               }
             >
-              <option value={`1/binded`}>Binded</option>
-              <option value={`2/loose`}>Loose</option>
+              <option value={`${product?.attributes.bindedPrice}/binded`}>
+                Binded
+              </option>
+              <option value={`${product?.attributes.loosePrice}/loose`}>
+                Loose
+              </option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
           </div>
@@ -323,8 +320,14 @@ export default function Calculator({ product }) {
                 setCalData({ ...calData, color: e.target.value })
               }
             >
-              <option value={`1/black & white`}>Black & White</option>
-              <option value={`2/color`}>Color</option>
+              <option
+                value={`${product?.attributes.blackWhitePrice}/black & white`}
+              >
+                Black & White
+              </option>
+              <option value={`${product?.attributes.colorPrice}/color`}>
+                Color
+              </option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
           </div>
@@ -346,8 +349,12 @@ export default function Calculator({ product }) {
               }
             >
               <option value={`0/none`}>None</option>
-              <option value={`1/matte`}>Matte</option>
-              <option value={`2/gloss`}>Gloss</option>
+              <option value={`${product?.attributes.mattePrice}/matte`}>
+                Matte
+              </option>
+              <option value={`${product?.attributes.glossPrice}/gloss`}>
+                Gloss
+              </option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
           </div>
@@ -368,9 +375,17 @@ export default function Calculator({ product }) {
                 setCalData({ ...calData, production_time: e.target.value })
               }
             >
-              <option value={`5/2-3 Business Days `}>2-3 Business Days</option>
-              <option value={`10/next day`}>Next Day</option>
-              <option value={`15/same day`}>Same Day</option>
+              <option
+                value={`${product?.attributes.businessDayPrice}/2-3 Business Days `}
+              >
+                2-3 Business Days
+              </option>
+              <option value={`${product?.attributes.nextDayPrice}/next day`}>
+                Next Day
+              </option>
+              <option value={`${product?.attributes.sameDayPrice}/same day`}>
+                Same Day
+              </option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
           </div>
