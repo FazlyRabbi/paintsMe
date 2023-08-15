@@ -69,11 +69,6 @@ function contacts() {
   };
 
 
-
-
-
-
-
   return (
     <section className="contacts">
       <Header />

@@ -48,7 +48,6 @@ function addporduct() {
 
   const [isFatching, setIsFatching] = useState(false);
 
-
   const formData = typeof window !== "undefined" ? new FormData() : "";
   const [thubmnail1, setThubmnail1] = useState(null);
   const [thubmnail2, setThubmnail2] = useState(null);
@@ -73,8 +72,6 @@ function addporduct() {
     formData.append(`files.Thubmnails_4`, thubmnail4, thubmnail4.name);
 
     setIsFatching(true);
-
-
 
     const res = await fetch(`${API_URL}/api/products?populate=*`, {
       method: "POST",
@@ -268,7 +265,7 @@ function addporduct() {
                         required
                         disabled={isFatching}
                         name="files"
-                        accept="image/jpeg, image/png"
+                        accept="image/jpeg, image/png , image/webp, "
                         type="file"
                         placeholder="Image"
                         className="flex justify-start "
@@ -283,7 +280,7 @@ function addporduct() {
                         required
                         disabled={isFatching}
                         name="files"
-                        accept="image/jpeg, image/png"
+                        accept="image/jpeg, image/png , image/webp"
                         type="file"
                         placeholder="Image"
                         className="flex justify-start "
@@ -297,7 +294,7 @@ function addporduct() {
                         required
                         disabled={isFatching}
                         name="files"
-                        accept="image/jpeg, image/png"
+                        accept="image/jpeg, image/png , image/webp"
                         type="file"
                         placeholder="Image"
                         className="flex justify-start"
@@ -311,7 +308,7 @@ function addporduct() {
                         required
                         disabled={isFatching}
                         name="files"
-                        accept="image/jpeg, image/png"
+                        accept="image/jpeg, image/png , image/webp"
                         type="file"
                         placeholder="Image"
                         className="flex justify-start"
