@@ -3,12 +3,12 @@ import Link from "next/link";
 import { useContext } from "react";
 import styles from "../styles/Home.module.css";
 
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 
 function Asiebar() {
-
   const { sidebars } = useContext(SidebarContext);
 
+  console.log(sidebars);
   return (
     <aside className="sidebar">
       <Link
@@ -19,7 +19,7 @@ function Asiebar() {
       </Link>
 
       {sidebars &&
-        sidebars.map((menu, index) => (
+        sidebars?.map((menu, index) => (
           <div className="aec-bluprints" key={index}>
             <ul className="w-[80%] ">
               <li
@@ -36,7 +36,7 @@ function Asiebar() {
                   key={index}
                 >
                   <Link
-                    href={`/shop/${menu.attributes?.MainManu.toLowerCase()}/${submenu?.Submenu.toLowerCase()}`}
+                    href={`/shop/${menu.attributes?.MainManu?.toLowerCase()}`}
                   >
                     {submenu?.Submenu}
                   </Link>
