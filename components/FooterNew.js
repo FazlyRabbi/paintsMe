@@ -17,7 +17,7 @@ export default function FooterNew() {
             <ul className=" capitalize mt-2">
               <li className="mb-2">Nprintandgraph companie </li>
 
-              <li className="mb-2">
+              <li className="mb-2  lowercase">
                 From NEW PRINT AND GRAPH "BANNERS, STICKERS, TABLE CLOTHES,
                 FLAGS, BACK DROPS, SWIFT BANNERS, STEP AND REPEAT, DECALS,
                 BUSINESS CARDS, MENU CARDS"
